@@ -3,75 +3,300 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>OpenTwentyFour GitHub Pages Test</title>
+  <title>Open24 | Project Landing</title>
+  <meta name="description" content="Open24 is a Nuxt + Strapi + Stripe platform for tennis court booking, course enrollment, and operations." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Manrope:wght@400;600;700&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg1: #f3f8ff;
-      --bg2: #e7fff5;
-      --text: #0f172a;
+      --bg: #f6f7f3;
+      --ink: #132019;
+      --muted: #4a5b52;
       --card: #ffffff;
-      --accent: #0ea5e9;
-      --muted: #475569;
+      --line: #d8e0d9;
+      --brand: #0f8b5f;
+      --brand-2: #f2c94c;
+      --shadow: 0 14px 36px rgba(12, 26, 17, 0.12);
     }
 
     * { box-sizing: border-box; }
 
     body {
       margin: 0;
+      font-family: "Manrope", "Segoe UI", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 10% 10%, #d7f8e8 0, transparent 38%),
+        radial-gradient(circle at 90% 15%, #fff0bd 0, transparent 34%),
+        var(--bg);
       min-height: 100vh;
-      font-family: "Avenir Next", "Segoe UI", sans-serif;
-      color: var(--text);
-      background: linear-gradient(135deg, var(--bg1), var(--bg2));
-      display: grid;
-      place-items: center;
-      padding: 24px;
     }
 
-    .card {
-      width: min(760px, 100%);
+    .container {
+      width: min(1120px, 92vw);
+      margin: 0 auto;
+    }
+
+    header {
+      padding: 22px 0;
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      background: rgba(255, 255, 255, 0.82);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 10px 14px;
+      backdrop-filter: blur(8px);
+    }
+
+    .logo {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 1rem;
+      letter-spacing: 0.04em;
+      font-weight: 700;
+    }
+
+    .links {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .links a {
+      text-decoration: none;
+      color: var(--ink);
+      font-weight: 600;
+      font-size: 0.92rem;
+      border-radius: 999px;
+      padding: 8px 12px;
+      border: 1px solid transparent;
+    }
+
+    .links a:hover { border-color: var(--line); }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 20px;
+      margin: 12px 0 28px;
+    }
+
+    .hero-card {
       background: var(--card);
-      border-radius: 16px;
+      border-radius: 24px;
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
       padding: 28px;
-      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.12);
     }
 
     h1 {
-      margin: 0 0 10px;
-      font-size: clamp(1.6rem, 3vw, 2.3rem);
-      line-height: 1.2;
+      margin: 0 0 12px;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(2rem, 4vw, 3.1rem);
+      line-height: 1.05;
+      max-width: 12ch;
     }
 
-    p {
-      margin: 0 0 12px;
+    .subtitle {
+      margin: 0;
       color: var(--muted);
       line-height: 1.6;
+      max-width: 58ch;
     }
 
-    .badge {
-      display: inline-block;
-      margin-top: 4px;
-      padding: 8px 12px;
-      border-radius: 999px;
-      background: rgba(14, 165, 233, 0.14);
-      color: #0369a1;
-      font-weight: 600;
+    .cta {
+      margin-top: 20px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      text-decoration: none;
+      border-radius: 12px;
+      padding: 10px 14px;
+      font-weight: 700;
       font-size: 0.92rem;
     }
 
-    code {
-      background: #f1f5f9;
-      border-radius: 6px;
-      padding: 2px 6px;
-      color: #0f172a;
+    .btn-primary {
+      background: var(--brand);
+      color: #fff;
+    }
+
+    .btn-secondary {
+      background: #fff;
+      color: var(--ink);
+      border: 1px solid var(--line);
+    }
+
+    .meta {
+      display: grid;
+      gap: 10px;
+    }
+
+    .pill {
+      border: 1px solid var(--line);
+      background: #fff;
+      border-radius: 14px;
+      padding: 12px;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    section {
+      margin-bottom: 26px;
+    }
+
+    h2 {
+      font-family: "Space Grotesk", sans-serif;
+      margin: 0 0 12px;
+      font-size: 1.45rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 16px;
+    }
+
+    .card h3 {
+      margin: 0 0 8px;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 1rem;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.55;
+    }
+
+    .arch {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 18px;
+      overflow-x: auto;
+    }
+
+    .arch svg { width: 100%; min-width: 780px; height: auto; }
+
+    footer {
+      color: var(--muted);
+      font-size: 0.88rem;
+      padding: 10px 0 36px;
+    }
+
+    @media (max-width: 930px) {
+      .hero { grid-template-columns: 1fr; }
+      .grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
-  <main class="card">
-    <h1>OpenTwentyFour GitHub Pages Test</h1>
-    <p>This is a test <code>index.html</code> for GitHub Pages.</p>
-    <p>If you can see this page online, publishing is working.</p>
-    <span class="badge">Build marker: 2026-03-27</span>
+  <header class="container">
+    <div class="nav">
+      <div class="logo">OPEN24 PROJECT</div>
+      <nav class="links">
+        <a href="index.html">Overview</a>
+        <a href="reserve-resource.html">Reserve Flow</a>
+        <a href="https://github.com/opentwentyfour/opentwentyfour.github.io">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div class="hero-card">
+        <h1>Open24 is a full booking and operations platform for tennis programs.</h1>
+        <p class="subtitle">
+          The project combines a Nuxt 4 frontend, a Nuxt server BFF, Strapi 5 backend services,
+          and Stripe payments to support court reservations, course enrollments, memberships,
+          credits, and admin/coach operations in one system.
+        </p>
+        <div class="cta">
+          <a class="btn btn-primary" href="reserve-resource.html">View Reserve Resource Flow</a>
+          <a class="btn btn-secondary" href="https://github.com/opentwentyfour">Project Org</a>
+        </div>
+      </div>
+      <aside class="meta">
+        <div class="pill"><strong>Client:</strong> Nuxt 4 + Nuxt UI v4 + Tailwind 4</div>
+        <div class="pill"><strong>BFF:</strong> Nuxt server APIs for Stripe + secure backend proxy</div>
+        <div class="pill"><strong>Backend:</strong> Strapi 5 CMS domain APIs</div>
+        <div class="pill"><strong>Payments:</strong> Stripe Checkout / PaymentIntents / subscriptions</div>
+      </aside>
+    </section>
+
+    <section>
+      <h2>High-level capabilities</h2>
+      <div class="grid">
+        <article class="card">
+          <h3>Resource Booking</h3>
+          <p>Users reserve 1-hour court slots with checkout options including cards, credits, and passes.</p>
+        </article>
+        <article class="card">
+          <h3>Course Lifecycle</h3>
+          <p>Supports fixed, ongoing, and on-demand course workflows for customers, coaches, and admins.</p>
+        </article>
+        <article class="card">
+          <h3>Operational Controls</h3>
+          <p>Role-based admin tools for pricing rules, legal docs, session scheduling, and enrollment management.</p>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <h2>System Architecture Snapshot</h2>
+      <div class="arch" aria-label="Open24 architecture overview diagram">
+        <svg viewBox="0 0 980 240" role="img" aria-labelledby="arch-title arch-desc">
+          <title id="arch-title">Open24 architecture</title>
+          <desc id="arch-desc">Browser client talks to Nuxt BFF, which connects to Strapi backend and Stripe API.</desc>
+          <defs>
+            <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+              <path d="M0,0 L0,6 L9,3 z" fill="#1f2937" />
+            </marker>
+          </defs>
+
+          <rect x="20" y="56" width="250" height="118" rx="14" fill="#ffffff" stroke="#d8e0d9" />
+          <text x="145" y="100" text-anchor="middle" font-family="Space Grotesk" font-size="19" fill="#132019">Browser Client</text>
+          <text x="145" y="130" text-anchor="middle" font-family="Manrope" font-size="14" fill="#4a5b52">Nuxt 4 SPA + Nuxt UI</text>
+
+          <rect x="365" y="56" width="250" height="118" rx="14" fill="#ffffff" stroke="#d8e0d9" />
+          <text x="490" y="100" text-anchor="middle" font-family="Space Grotesk" font-size="19" fill="#132019">Nuxt Server (BFF)</text>
+          <text x="490" y="130" text-anchor="middle" font-family="Manrope" font-size="14" fill="#4a5b52">Stripe APIs + secure proxy</text>
+
+          <rect x="710" y="30" width="250" height="86" rx="14" fill="#ffffff" stroke="#d8e0d9" />
+          <text x="835" y="73" text-anchor="middle" font-family="Space Grotesk" font-size="19" fill="#132019">Strapi 5</text>
+          <text x="835" y="95" text-anchor="middle" font-family="Manrope" font-size="14" fill="#4a5b52">REST domain APIs</text>
+
+          <rect x="710" y="130" width="250" height="86" rx="14" fill="#ffffff" stroke="#d8e0d9" />
+          <text x="835" y="172" text-anchor="middle" font-family="Space Grotesk" font-size="19" fill="#132019">Stripe</text>
+          <text x="835" y="194" text-anchor="middle" font-family="Manrope" font-size="14" fill="#4a5b52">Payments + subscriptions</text>
+
+          <line x1="270" y1="115" x2="365" y2="115" stroke="#1f2937" stroke-width="2.4" marker-end="url(#arrow)" />
+          <line x1="615" y1="85" x2="710" y2="75" stroke="#1f2937" stroke-width="2.4" marker-end="url(#arrow)" />
+          <line x1="615" y1="145" x2="710" y2="165" stroke="#1f2937" stroke-width="2.4" marker-end="url(#arrow)" />
+        </svg>
+      </div>
+    </section>
   </main>
+
+  <footer class="container">
+    Source reference: `open24-docs/ARCHITECTURE.md`.
+  </footer>
 </body>
 </html>
