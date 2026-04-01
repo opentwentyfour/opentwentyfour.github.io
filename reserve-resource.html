@@ -3,281 +3,40 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Open24 | Reserve a Tennis Court</title>
-  <meta name="description" content="Reserve resource (tennis court) flow for Open24 based on architecture documentation." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Manrope:wght@400;600;700&display=swap" rel="stylesheet" />
+  <title>Open24 | Booking Flow</title>
+  <meta name="description" content="Open24 resource booking flow." />
+  <meta http-equiv="refresh" content="0; url=resource-booking-flow.html" />
+  <link rel="canonical" href="resource-booking-flow.html" />
   <style>
-    :root {
-      --bg: #fcfbf7;
-      --ink: #1b2220;
-      --muted: #5a6661;
-      --card: #ffffff;
-      --line: #d9e1dc;
-      --brand: #2f6df6;
-      --brand-soft: #e8efff;
-      --ok: #0f8b5f;
-    }
-
-    * { box-sizing: border-box; }
-
     body {
       margin: 0;
-      color: var(--ink);
-      font-family: "Manrope", "Segoe UI", sans-serif;
-      background:
-        radial-gradient(circle at 92% 7%, #e6ecff 0, transparent 36%),
-        radial-gradient(circle at 8% 100%, #dff8ea 0, transparent 30%),
-        var(--bg);
-    }
-
-    .container { width: min(1080px, 92vw); margin: 0 auto; }
-
-    header { padding: 24px 0 10px; }
-
-    .nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      padding: 10px 14px;
-      background: rgba(255,255,255,.82);
-      backdrop-filter: blur(8px);
-    }
-
-    .brand { font-family: "Space Grotesk", sans-serif; font-weight: 700; letter-spacing: .04em; }
-
-    .nav a {
-      text-decoration: none;
-      color: var(--ink);
-      font-weight: 600;
-      font-size: .92rem;
-      margin-left: 8px;
-      padding: 8px 10px;
-      border-radius: 999px;
-    }
-
-    .nav a:hover { background: #f2f5f3; }
-
-    .hero {
-      margin: 14px 0 18px;
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: 20px;
-      padding: 24px;
-    }
-
-    h1 {
-      margin: 0 0 8px;
-      font-family: "Space Grotesk", sans-serif;
-      font-size: clamp(1.8rem, 4vw, 2.8rem);
-      line-height: 1.08;
-    }
-
-    .intro { margin: 0; color: var(--muted); line-height: 1.65; max-width: 70ch; }
-
-    .chips { margin-top: 14px; display: flex; gap: 8px; flex-wrap: wrap; }
-
-    .chip {
-      border-radius: 999px;
-      border: 1px solid var(--line);
-      background: #fff;
-      font-size: .85rem;
-      padding: 7px 11px;
-      color: var(--muted);
-      font-weight: 700;
-    }
-
-    .section {
-      margin: 0 0 18px;
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      padding: 18px;
-      background: #fff;
-    }
-
-    h2 {
-      margin: 0 0 12px;
-      font-family: "Space Grotesk", sans-serif;
-      font-size: 1.32rem;
-    }
-
-    .flow {
-      display: grid;
-      grid-template-columns: repeat(5, minmax(0, 1fr));
-      gap: 12px;
-      align-items: stretch;
-    }
-
-    .step {
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      padding: 12px;
-      background: #fff;
-      position: relative;
-      min-height: 138px;
-    }
-
-    .step:not(:last-child)::after {
-      content: "→";
-      position: absolute;
-      right: -10px;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 1.15rem;
-      color: #678;
-      font-weight: 700;
-    }
-
-    .step .n {
-      width: 28px;
-      height: 28px;
-      border-radius: 999px;
+      min-height: 100vh;
       display: grid;
       place-items: center;
+      font-family: "Segoe UI", sans-serif;
+      background: #f7f8f5;
+      color: #132018;
+      padding: 24px;
+    }
+    .card {
+      max-width: 560px;
+      border: 1px solid #d8e2db;
+      border-radius: 14px;
+      background: #fff;
+      padding: 18px;
+      text-align: center;
+    }
+    a {
+      color: #0f8b5f;
       font-weight: 700;
-      background: var(--brand-soft);
-      color: var(--brand);
-      margin-bottom: 8px;
-      font-size: .9rem;
-    }
-
-    .step h3 {
-      margin: 0 0 6px;
-      font-size: .95rem;
-      font-family: "Space Grotesk", sans-serif;
-    }
-
-    .step p {
-      margin: 0;
-      font-size: .86rem;
-      color: var(--muted);
-      line-height: 1.5;
-    }
-
-    ul {
-      margin: 10px 0 0;
-      padding-left: 18px;
-      color: var(--muted);
-      line-height: 1.6;
-    }
-
-    code {
-      background: #eef2f0;
-      border-radius: 6px;
-      padding: 2px 6px;
-      color: #1f2b27;
-      font-size: .88rem;
-    }
-
-    .ok {
-      margin-top: 12px;
-      background: #f3fcf8;
-      border: 1px solid #ccecdf;
-      color: #24664a;
-      border-radius: 12px;
-      padding: 10px 12px;
-      font-size: .9rem;
-      font-weight: 600;
-    }
-
-    footer {
-      padding: 8px 0 28px;
-      color: var(--muted);
-      font-size: .86rem;
-    }
-
-    @media (max-width: 980px) {
-      .flow { grid-template-columns: 1fr; }
-      .step:not(:last-child)::after {
-        content: "↓";
-        right: 50%;
-        top: auto;
-        bottom: -15px;
-        transform: translateX(50%);
-      }
+      text-decoration: none;
     }
   </style>
 </head>
 <body>
-  <header class="container">
-    <div class="nav">
-      <div class="brand">OPEN24 PROJECT</div>
-      <nav>
-        <a href="index.html">Overview</a>
-        <a href="reserve-resource.html">Reserve Flow</a>
-      </nav>
-    </div>
-  </header>
-
-  <main class="container">
-    <section class="hero">
-      <h1>How Open24 reserves a tennis court resource</h1>
-      <p class="intro">
-        This page summarizes the <strong>Resource Booking Checkout</strong> architecture from
-        <code>open24-docs/ARCHITECTURE.md</code>, including the core APIs and fulfillment steps.
-      </p>
-      <div class="chips">
-        <span class="chip">1-hour slots</span>
-        <span class="chip">Start at :00 or :30</span>
-        <span class="chip">BFF + Stripe + Strapi</span>
-      </div>
-    </section>
-
-    <section class="section">
-      <h2>Reservation flow chart</h2>
-      <div class="flow" aria-label="Resource reservation flow chart">
-        <article class="step">
-          <div class="n">1</div>
-          <h3>Select slot(s)</h3>
-          <p>User picks court slots on reserve page. Cart is staged in session storage.</p>
-        </article>
-        <article class="step">
-          <div class="n">2</div>
-          <h3>Create checkout session</h3>
-          <p>Client calls <code>POST /api/stripe/create-checkout-session</code> on BFF.</p>
-        </article>
-        <article class="step">
-          <div class="n">3</div>
-          <h3>Process payment</h3>
-          <p>New card via Payment Element or saved-card via <code>charge-saved-card</code>.</p>
-        </article>
-        <article class="step">
-          <div class="n">4</div>
-          <h3>Fulfill order</h3>
-          <p>Create Booking, ResourceTimeSlots, Payment record, and apply credits/passes if used.</p>
-        </article>
-        <article class="step">
-          <div class="n">5</div>
-          <h3>Confirmation</h3>
-          <p>Send confirmation and redirect user to success page.</p>
-        </article>
-      </div>
-      <div class="ok">Source: “Checkout Flows → 1. Resource Booking Checkout” in <code>open24-docs/ARCHITECTURE.md</code>.</div>
-    </section>
-
-    <section class="section">
-      <h2>Key API calls in the booking path</h2>
-      <ul>
-        <li><code>POST /api/stripe/create-checkout-session</code> — initialize checkout session from selected slots.</li>
-        <li><code>POST /api/stripe/charge-saved-card</code> — optional saved-card payment path.</li>
-        <li>Booking fulfillment creates backend records for booking, time slots, and payment linkage.</li>
-        <li>Optional deductions: store credits or pass units, depending on selected payment strategy.</li>
-      </ul>
-    </section>
-
-    <section class="section">
-      <h2>Integrity rules (from architecture)</h2>
-      <ul>
-        <li>Booking slots are enforced as valid reservation windows and should not overlap.</li>
-        <li>Stripe operations are proxied via BFF server routes for secret-key safety.</li>
-        <li>BFF-to-backend calls use an internal shared secret header for trusted server traffic.</li>
-      </ul>
-    </section>
+  <main class="card">
+    <p>This page is merged into the unified booking flow page.</p>
+    <p><a href="resource-booking-flow.html">Open Booking Flow</a></p>
   </main>
-
-  <footer class="container">Open24 docs reference: <code>open24-docs/ARCHITECTURE.md</code></footer>
 </body>
 </html>

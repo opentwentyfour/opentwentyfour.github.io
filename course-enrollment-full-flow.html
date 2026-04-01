@@ -1,0 +1,601 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Open24 | Course Enrollment Full Flow</title>
+  <meta name="description" content="End-to-end Open24 course enrollment flow from course selection through checkout, enrollment finalization, and confirmation." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Manrope:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #f7f8f5;
+      --ink: #132018;
+      --muted: #4f6157;
+      --card: #ffffff;
+      --line: #d8e2db;
+      --brand: #0f8b5f;
+      --brand-soft: #e9f7f1;
+      --shadow: 0 12px 30px rgba(15, 28, 20, 0.12);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: "Manrope", "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 9% 11%, #dcf8ea 0, transparent 34%),
+        radial-gradient(circle at 88% 9%, #ece8ff 0, transparent 30%),
+        var(--bg);
+    }
+
+    .container {
+      width: min(1120px, 92vw);
+      margin: 0 auto;
+    }
+
+    header {
+      padding: 22px 0 10px;
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 10px 14px;
+      background: rgba(255, 255, 255, 0.86);
+      backdrop-filter: blur(8px);
+    }
+
+    .logo {
+      font-family: "Space Grotesk", sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      font-size: 0.98rem;
+    }
+
+    .links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .links a {
+      text-decoration: none;
+      color: var(--ink);
+      font-weight: 600;
+      font-size: 0.9rem;
+      border-radius: 999px;
+      padding: 8px 12px;
+      border: 1px solid transparent;
+    }
+
+    .links a:hover,
+    .links a.current {
+      border-color: var(--line);
+      background: #f6f8f7;
+    }
+
+    .hero {
+      margin: 14px 0 18px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: var(--card);
+      box-shadow: var(--shadow);
+      padding: 24px;
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(1.9rem, 4vw, 3rem);
+      line-height: 1.06;
+      max-width: 22ch;
+    }
+
+    .intro {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.65;
+      max-width: 76ch;
+    }
+
+    .chips {
+      margin-top: 16px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .chip {
+      font-size: 0.83rem;
+      font-weight: 700;
+      color: var(--muted);
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 7px 11px;
+    }
+
+    .section {
+      margin: 0 0 18px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: #fff;
+      padding: 18px;
+    }
+
+    h2 {
+      margin: 0 0 12px;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 1.36rem;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 10px;
+    }
+
+    .phase {
+      display: grid;
+      grid-template-columns: 38px 1fr;
+      gap: 12px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 12px;
+      background: #fff;
+    }
+
+    .phase .n {
+      width: 30px;
+      height: 30px;
+      border-radius: 999px;
+      display: grid;
+      place-items: center;
+      font-weight: 700;
+      color: var(--brand);
+      background: var(--brand-soft);
+      font-size: 0.88rem;
+      margin-top: 2px;
+    }
+
+    .phase h3 {
+      margin: 0 0 4px;
+      font-size: 1rem;
+      font-family: "Space Grotesk", sans-serif;
+    }
+
+    .phase p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.55;
+    }
+
+    .phase code,
+    .note code,
+    td code,
+    li code {
+      background: #eef2f0;
+      border-radius: 6px;
+      padding: 2px 6px;
+      color: #1f2b27;
+      font-size: 0.86rem;
+      white-space: nowrap;
+    }
+
+    .cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 12px;
+      background: #fff;
+    }
+
+    .panel h3 {
+      margin: 0 0 8px;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 1rem;
+    }
+
+    ul {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height: 1.56;
+      font-size: 0.9rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+      overflow: hidden;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+    }
+
+    th,
+    td {
+      border-bottom: 1px solid var(--line);
+      padding: 10px;
+      vertical-align: top;
+      text-align: left;
+    }
+
+    th {
+      background: #f8fbf9;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 0.86rem;
+      letter-spacing: 0.02em;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    .note {
+      margin-top: 12px;
+      border: 1px solid #cfe8db;
+      background: #f3fbf7;
+      color: #245942;
+      border-radius: 12px;
+      padding: 10px 12px;
+      font-size: 0.89rem;
+      line-height: 1.5;
+      font-weight: 600;
+    }
+
+    .flowchart-wrap {
+      margin-top: 8px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #fbfdfc;
+      overflow-x: auto;
+      padding: 10px;
+    }
+
+    .flow-svg {
+      width: 100%;
+      min-width: 1060px;
+      height: auto;
+      display: block;
+    }
+
+    .flow-box {
+      fill: #ffffff;
+      stroke: var(--line);
+      stroke-width: 2;
+    }
+
+    .flow-box.highlight {
+      fill: #effaf4;
+      stroke: #9fdac0;
+    }
+
+    .flow-arrow {
+      stroke: #7d8f84;
+      stroke-width: 2.2;
+      fill: none;
+      marker-end: url(#flow-arrow-head);
+    }
+
+    .flow-title {
+      font-family: Space Grotesk, Manrope, sans-serif;
+      font-weight: 700;
+      font-size: 15px;
+      fill: #173127;
+    }
+
+    .flow-desc {
+      font-family: Manrope, Segoe UI, sans-serif;
+      font-size: 12px;
+      fill: #50645a;
+    }
+
+    .flow-tag {
+      font-family: Manrope, Segoe UI, sans-serif;
+      font-size: 11px;
+      fill: #2f6df6;
+      font-weight: 700;
+    }
+
+    .mermaid-wrap {
+      margin-top: 8px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #fbfdfc;
+      overflow-x: auto;
+      padding: 10px;
+    }
+
+    .mermaid {
+      min-width: 980px;
+    }
+
+    footer {
+      color: var(--muted);
+      font-size: 0.86rem;
+      padding: 8px 0 30px;
+    }
+
+    @media (max-width: 900px) {
+      .cols { grid-template-columns: 1fr; }
+      .links { justify-content: flex-end; }
+    }
+  </style>
+</head>
+<body>
+  <header class="container">
+    <div class="nav">
+      <div class="logo">OPEN24 PROJECT</div>
+      <nav class="links">
+        <a href="index.html">Overview</a>
+        <a href="resource-booking-flow.html">Book Court Flow</a>
+        <a class="current" href="course-enrollment-full-flow.html">Enroll Course Flow</a>
+        <a href="testing.html">Testing</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <h1>End-to-end course enrollment flow</h1>
+      <p class="intro">
+        This page consolidates the full enrollment path across customer screens, secure payment processing, enrollment finalization, attendance creation, waiver linkage, and confirmation handling.
+      </p>
+      <div class="chips">
+        <span class="chip">Course selection → checkout</span>
+        <span class="chip">Waiver + payment + finalize</span>
+        <span class="chip">Enrollment + attendance + payment records</span>
+        <span class="chip">Inline confirmation (no separate success route)</span>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Flow Chart</h2>
+      <div class="flowchart-wrap">
+        <svg class="flow-svg" viewBox="0 0 1180 250" role="img" aria-label="Course enrollment end-to-end flow chart">
+          <defs>
+            <marker id="flow-arrow-head" markerWidth="9" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 9 3, 0 6" fill="#7d8f84"></polygon>
+            </marker>
+          </defs>
+
+          <line class="flow-arrow" x1="178" y1="95" x2="228" y2="95"></line>
+          <line class="flow-arrow" x1="398" y1="95" x2="448" y2="95"></line>
+          <line class="flow-arrow" x1="618" y1="95" x2="668" y2="95"></line>
+          <line class="flow-arrow" x1="838" y1="95" x2="888" y2="95"></line>
+          <line class="flow-arrow" x1="1058" y1="95" x2="1094" y2="95"></line>
+
+          <rect class="flow-box" x="18" y="32" width="160" height="126" rx="14"></rect>
+          <text class="flow-title" x="34" y="60">1. Select</text>
+          <text class="flow-desc" x="34" y="82">Choose course(s)</text>
+          <text class="flow-desc" x="34" y="100">and session(s)</text>
+          <text class="flow-tag" x="34" y="130">pending selection in temporary cart</text>
+
+          <rect class="flow-box" x="238" y="32" width="160" height="126" rx="14"></rect>
+          <text class="flow-title" x="254" y="60">2. Review</text>
+          <text class="flow-desc" x="254" y="82">Attendee + sessions</text>
+          <text class="flow-desc" x="254" y="100">waiver + credits/coupon</text>
+          <text class="flow-tag" x="254" y="130">checkout screen</text>
+
+          <rect class="flow-box" x="458" y="32" width="160" height="126" rx="14"></rect>
+          <text class="flow-title" x="474" y="60">3. Pay</text>
+          <text class="flow-desc" x="474" y="82">Create course checkout</text>
+          <text class="flow-desc" x="474" y="100">session / saved-card</text>
+          <text class="flow-tag" x="474" y="130">secure payment gateway</text>
+
+          <rect class="flow-box highlight" x="678" y="32" width="160" height="126" rx="14"></rect>
+          <text class="flow-title" x="694" y="60">4. Finalize</text>
+          <text class="flow-desc" x="694" y="82">Create enrollment +</text>
+          <text class="flow-desc" x="694" y="100">payment + attendance</text>
+          <text class="flow-tag" x="694" y="130">finalizeAllEnrollments()</text>
+
+          <rect class="flow-box" x="898" y="32" width="160" height="126" rx="14"></rect>
+          <text class="flow-title" x="914" y="60">5. Confirm</text>
+          <text class="flow-desc" x="914" y="82">Inline confirmation</text>
+          <text class="flow-desc" x="914" y="100">course details shown</text>
+          <text class="flow-tag" x="914" y="130">no separate success page</text>
+
+          <rect class="flow-box" x="1098" y="32" width="64" height="126" rx="14"></rect>
+          <text class="flow-title" x="1110" y="60">6</text>
+          <text class="flow-desc" x="1110" y="82">My</text>
+          <text class="flow-desc" x="1110" y="100">Enrollments</text>
+        </svg>
+      </div>
+      <div class="note">Flow chart aligns with course enrollment checkout and finalization behavior documented in architecture specs.</div>
+    </section>
+
+    <section class="section">
+      <h2>Detailed Mermaid Diagram</h2>
+      <div class="mermaid-wrap">
+        <div class="mermaid">
+sequenceDiagram
+    autonumber
+    participant U as User
+    participant C as Enrollment Checkout
+    participant APP as Application Services
+    participant S as Stripe
+    participant EP as Enrollment Platform
+
+    U->>C: Select courses/sessions and open checkout
+    C->>C: Validate waiver + attendee context
+
+    C->>APP: Request enrollment payment session
+    APP->>S: Initialize payment session for selected sessions
+    S-->>APP: Session details
+    APP-->>C: Session details
+
+    alt Saved card flow
+      U->>C: Confirm saved-card payment
+      C->>APP: Charge saved payment method
+      APP->>S: Confirm saved-card payment
+      S-->>APP: Payment succeeded
+      APP-->>C: Payment result
+    else New card flow
+      U->>C: Confirm payment element
+      C->>S: actions.confirm()
+      S-->>C: Payment success
+    else Credits-only flow
+      C->>APP: Apply available credits
+      APP-->>C: Credits applied
+    end
+
+    loop For each pending enrollment item
+      C->>EP: Create enrollment record
+      C->>EP: Create payment record
+      C->>EP: Create session attendance records
+      C->>EP: Create waiver agreement record
+    end
+
+    opt Promotion / metadata post-processing
+      C->>EP: Apply promotion usage
+      C->>APP: Update payment reference details
+    end
+
+    C->>U: Show inline enrollment confirmation
+    U->>C: Open enrollments list/details
+    C->>EP: Fetch enrollment and attendance data
+        </div>
+      </div>
+      <div class="note">This Mermaid diagram is the detailed request/response sequence for the complete course enrollment path.</div>
+    </section>
+
+    <section class="section">
+      <h2>Customer Journey (Full Path)</h2>
+      <div class="timeline">
+        <article class="phase">
+          <div class="n">1</div>
+          <div>
+            <h3>Selection and staging</h3>
+            <p>Customer selects one or more courses/sessions. Pending enrollment items are staged and user enters <code>checkout screen</code>.</p>
+          </div>
+        </article>
+        <article class="phase">
+          <div class="n">2</div>
+          <div>
+            <h3>Review + waiver</h3>
+            <p>Checkout displays attendee/session details, validates waiver, and applies credits/coupon context before payment.</p>
+          </div>
+        </article>
+        <article class="phase">
+          <div class="n">3</div>
+          <div>
+            <h3>Checkout session creation</h3>
+            <p>The app requests a secure enrollment checkout session based on selected course sessions.</p>
+          </div>
+        </article>
+        <article class="phase">
+          <div class="n">4</div>
+          <div>
+            <h3>Payment execution path</h3>
+            <p>Enrollment supports new-card confirm, saved-card charge, or credits-only path (depending on amount due and selected method).</p>
+          </div>
+        </article>
+        <article class="phase">
+          <div class="n">5</div>
+          <div>
+            <h3>Batch finalization</h3>
+            <p>Batch finalization creates enrollment, payment, and session attendance records, plus waiver linkage for each pending item.</p>
+          </div>
+        </article>
+        <article class="phase">
+          <div class="n">6</div>
+          <div>
+            <h3>Inline confirmation</h3>
+            <p>Checkout shows confirmation directly on-page (no dedicated success route), then user can inspect enrollment records in list/detail pages.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Core System Sequence</h2>
+      <table aria-label="Course enrollment system sequence">
+        <thead>
+          <tr>
+            <th>Phase</th>
+            <th>System Action</th>
+            <th>Purpose</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Checkout init</td>
+            <td>Create secure enrollment checkout session</td>
+            <td>Prepare payment details based on selected sessions.</td>
+          </tr>
+          <tr>
+            <td>Saved-card path</td>
+            <td>Charge saved payment method</td>
+            <td>Process payment using a stored card.</td>
+          </tr>
+          <tr>
+            <td>Enrollment create</td>
+            <td>Create enrollment records</td>
+            <td>Create an enrollment entity for each pending item.</td>
+          </tr>
+          <tr>
+            <td>Attendance create</td>
+            <td>Create attendance records for selected sessions</td>
+            <td>Create session attendance entries for all selected sessions.</td>
+          </tr>
+          <tr>
+            <td>Payment + waiver</td>
+            <td>Create payment and waiver records</td>
+            <td>Persist payment audit and waiver linkage for enrollment context.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="section">
+      <h2>Enrollment Variants and Notes</h2>
+      <div class="cols">
+        <article class="panel">
+          <h3>Payment variants</h3>
+          <ul>
+            <li>Full Stripe (new card)</li>
+            <li>Saved card</li>
+            <li>Credits-only (when credit balance fully covers amount)</li>
+            <li>Credits + Stripe mixed path (if remainder exists)</li>
+          </ul>
+        </article>
+        <article class="panel">
+          <h3>Operational notes</h3>
+          <ul>
+            <li>Checkout is shared with on-demand mode in the app, but this page focuses on course enrollment flow.</li>
+            <li>Batch finalization behavior is key for multi-course checkout reliability.</li>
+            <li>Enrollment confirmation is rendered inline rather than redirecting to a dedicated success page.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="container">
+    Source: internal product, architecture, and course flow documentation.
+  </footer>
+
+  <script type="module">
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.esm.min.mjs";
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: "neutral",
+      securityLevel: "loose"
+    });
+  </script>
+</body>
+</html>
