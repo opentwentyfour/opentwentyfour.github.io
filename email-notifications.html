@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Open24 | Customer Email Notifications</title>
+  <meta name="description" content="Public guide to Open24 customer email notifications, send timing, and expected actions." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Manrope:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #f6f7f3;
+      --ink: #132019;
+      --muted: #4a5b52;
+      --card: #ffffff;
+      --line: #d8e0d9;
+      --brand: #0f8b5f;
+      --shadow: 0 14px 36px rgba(12, 26, 17, 0.12);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Manrope", "Segoe UI", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 10% 10%, #d7f8e8 0, transparent 38%),
+        radial-gradient(circle at 90% 15%, #fff0bd 0, transparent 34%),
+        var(--bg);
+      min-height: 100vh;
+    }
+
+    .container {
+      width: min(1120px, 92vw);
+      margin: 0 auto;
+    }
+
+    header {
+      padding: 22px 0;
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      background: rgba(255, 255, 255, 0.82);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 10px 14px;
+      backdrop-filter: blur(8px);
+    }
+
+    .logo {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 1rem;
+      letter-spacing: 0.04em;
+      font-weight: 700;
+    }
+
+    .links {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .links a {
+      text-decoration: none;
+      color: var(--ink);
+      font-weight: 600;
+      font-size: 0.92rem;
+      border-radius: 999px;
+      padding: 8px 12px;
+      border: 1px solid transparent;
+    }
+
+    .links a:hover,
+    .links a.current {
+      border-color: var(--line);
+      background: #f6f8f7;
+    }
+
+    .hero {
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: var(--card);
+      box-shadow: var(--shadow);
+      padding: 24px;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(1.9rem, 4vw, 3rem);
+      line-height: 1.06;
+      max-width: 18ch;
+    }
+
+    .subtitle {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.65;
+      max-width: 80ch;
+    }
+
+    section {
+      margin-bottom: 22px;
+    }
+
+    h2 {
+      font-family: "Space Grotesk", sans-serif;
+      margin: 0 0 12px;
+      font-size: 1.4rem;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 860px;
+      background: #fff;
+    }
+
+    th,
+    td {
+      padding: 11px 12px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    th {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 0.84rem;
+      letter-spacing: 0.02em;
+      background: #f7faf8;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    .note {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 0.88rem;
+      line-height: 1.55;
+    }
+
+    footer {
+      color: var(--muted);
+      font-size: 0.88rem;
+      padding: 10px 0 36px;
+    }
+  </style>
+</head>
+<body>
+  <header class="container">
+    <div class="nav">
+      <div class="logo">OPEN24 PROJECT</div>
+      <nav class="links">
+        <a href="index.html">Overview</a>
+        <a href="resource-booking-flow.html">Book Court Flow</a>
+        <a href="course-enrollment-full-flow.html">Enroll Course Flow</a>
+        <a href="testing.html">Testing</a>
+        <a class="current" href="email-notifications.html">Email Notices</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <h1>Customer Email Notifications</h1>
+      <p class="subtitle">
+        Open24 sends service emails for bookings, enrollments, account security, and billing continuity. This page summarizes common customer emails, typical send timing, and expected actions.
+      </p>
+    </section>
+
+    <section>
+      <h2>Email Schedule and Purpose</h2>
+      <div class="table-wrap" role="region" aria-label="Customer email notifications and timing">
+        <table>
+          <thead>
+            <tr>
+              <th>Email</th>
+              <th>When It Is Sent</th>
+              <th>What To Expect / Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Booking Confirmation</td><td>Immediately after a court booking is created.</td><td>Confirms date/time/location and payment summary.</td></tr>
+            <tr><td>Booking Updated</td><td>Immediately after a booking is rescheduled or changed.</td><td>Shows updated booking details.</td></tr>
+            <tr><td>Booking Cancelled</td><td>Immediately after cancellation is completed.</td><td>Confirms cancellation status and related refund/credit outcome if applicable.</td></tr>
+            <tr><td>Upcoming Booking Reminder</td><td>Usually about 24 hours before start time.</td><td>Reminder of upcoming session and location.</td></tr>
+            <tr><td>Door Access Instructions</td><td>After qualifying booking or enrollment is confirmed.</td><td>Provides secure door-access flow and timing window.</td></tr>
+            <tr><td>Guest Waiver Request</td><td>When a guest waiver is required and still unsigned.</td><td>Guest receives signing link before access is allowed.</td></tr>
+            <tr><td>Course Enrollment Confirmed</td><td>Immediately after successful enrollment.</td><td>Confirms course/activity registration details.</td></tr>
+            <tr><td>Course Enrollment Updated</td><td>Immediately after enrollment details are changed.</td><td>Shows updated course session or enrollment information.</td></tr>
+            <tr><td>Course Enrollment Cancelled</td><td>Immediately after course cancellation/withdrawal.</td><td>Confirms cancellation and financial outcome where applicable.</td></tr>
+            <tr><td>Upcoming Course Session Reminder</td><td>Usually about 24 hours before session start.</td><td>Reminder for upcoming class/session.</td></tr>
+            <tr><td>Membership Purchased</td><td>Immediately after membership purchase is completed.</td><td>Confirms plan, billing cadence, and membership start.</td></tr>
+            <tr><td>Membership Renewed</td><td>Immediately after successful renewal charge.</td><td>Confirms continued active membership.</td></tr>
+            <tr><td>Membership Cancelled</td><td>Immediately when membership cancellation is confirmed.</td><td>Confirms cancellation timing and end-of-access date (if applicable).</td></tr>
+            <tr><td>Membership Renewal Failed</td><td>Immediately when recurring charge fails.</td><td>Requests payment method update to avoid interruption.</td></tr>
+            <tr><td>Payment Method Expiring Soon</td><td>Scheduled checks when saved card is close to expiry (typically within 30 days).</td><td>Advises customer to update card before renewal.</td></tr>
+            <tr><td>Payment Method Expired</td><td>Scheduled checks after card expiry.</td><td>Requests immediate payment method update.</td></tr>
+            <tr><td>Payment Method Missing</td><td>When membership is active but no valid payment method is available (for example, post-migration cases).</td><td>Requests card setup for next billing cycle.</td></tr>
+            <tr><td>Pass Purchased</td><td>Immediately after pass purchase.</td><td>Confirms pass added to account.</td></tr>
+            <tr><td>Pass Balance Low</td><td>Scheduled checks when remaining units fall below threshold.</td><td>Low-balance reminder before pass is exhausted.</td></tr>
+            <tr><td>Gift Card Purchase Confirmation</td><td>Immediately after gift card checkout.</td><td>Confirms gift card purchase details.</td></tr>
+            <tr><td>Gift Card Delivery</td><td>Immediately when gift card is issued to recipient.</td><td>Includes gift card code and redemption details.</td></tr>
+            <tr><td>Gift Card Redeemed</td><td>Immediately after successful redemption.</td><td>Confirms account balance update.</td></tr>
+            <tr><td>Verification Code</td><td>When account verification is requested.</td><td>One-time code for secure verification.</td></tr>
+            <tr><td>Password Reset</td><td>When password reset is requested.</td><td>Secure reset link with limited validity.</td></tr>
+            <tr><td>Registration Invitation</td><td>When an invited/migrated account is asked to complete onboarding.</td><td>Secure link to finish registration and set password.</td></tr>
+            <tr><td>Promotion Email (Optional)</td><td>Only when a customer is selected for a campaign.</td><td>Special offers or announcements; may include opt-out options where applicable.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note">
+        Timing can vary slightly based on system checks, timezone, and provider delivery latency. Open24 emails never include plaintext passwords and only show masked payment details when needed.
+      </p>
+    </section>
+  </main>
+
+  <footer class="container">
+    Public communication summary for Open24 customer notifications.
+  </footer>
+</body>
+</html>
