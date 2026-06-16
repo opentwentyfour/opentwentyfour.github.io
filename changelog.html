@@ -1,0 +1,503 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Open24 | Changelog</title>
+  <meta name="description" content="Open24 platform release notes — high-level summary of every published version." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Manrope:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #f6f7f3;
+      --ink: #132019;
+      --muted: #4a5b52;
+      --card: #ffffff;
+      --line: #d8e0d9;
+      --brand: #0f8b5f;
+      --brand-2: #f2c94c;
+      --shadow: 0 14px 36px rgba(12, 26, 17, 0.12);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Manrope", "Segoe UI", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 10% 10%, #d7f8e8 0, transparent 38%),
+        radial-gradient(circle at 90% 15%, #fff0bd 0, transparent 34%),
+        var(--bg);
+      min-height: 100vh;
+    }
+
+    .container { width: min(1120px, 92vw); margin: 0 auto; }
+
+    /* ── Header ─────────────────────────────────────── */
+    header { padding: 22px 0; }
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      background: rgba(255, 255, 255, 0.82);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 10px 14px;
+      backdrop-filter: blur(8px);
+    }
+    .logo {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 1rem;
+      letter-spacing: 0.04em;
+      font-weight: 700;
+    }
+    .links { display: flex; gap: 10px; flex-wrap: wrap; }
+    .links a {
+      text-decoration: none;
+      color: var(--ink);
+      font-weight: 600;
+      font-size: 0.92rem;
+      border-radius: 999px;
+      padding: 8px 12px;
+      border: 1px solid transparent;
+    }
+    .links a:hover { border-color: var(--line); }
+
+    /* ── Hero ───────────────────────────────────────── */
+    .hero {
+      background: var(--card);
+      border-radius: 24px;
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      padding: 28px;
+      margin: 12px 0 28px;
+    }
+    h1 {
+      margin: 0 0 12px;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(1.7rem, 3vw, 2.5rem);
+      line-height: 1.1;
+    }
+    .subtitle { margin: 0; color: var(--muted); line-height: 1.6; max-width: 70ch; }
+
+    /* ── Filter banner (only when filtered) ─────────── */
+    .filter-banner {
+      display: none;
+      align-items: center;
+      gap: 12px;
+      background: #fff8e1;
+      border: 1px solid var(--brand-2);
+      border-radius: 16px;
+      padding: 14px 18px;
+      margin-bottom: 20px;
+      color: #5a4a00;
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+    .filter-banner.is-active { display: flex; }
+    .filter-banner .label-pill {
+      background: var(--brand-2);
+      color: var(--ink);
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.02em;
+    }
+    .filter-banner button {
+      margin-left: auto;
+      background: transparent;
+      border: 1px solid #b8a050;
+      color: #5a4a00;
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 0.85rem;
+    }
+    .filter-banner button:hover { background: var(--brand-2); }
+
+    /* ── Release cards ──────────────────────────────── */
+    .release {
+      background: var(--card);
+      border-radius: 24px;
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      padding: 28px;
+      margin-bottom: 22px;
+      scroll-margin-top: 24px;
+    }
+    .release-head {
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+      flex-wrap: wrap;
+      padding-bottom: 14px;
+      border-bottom: 1px dashed var(--line);
+      margin-bottom: 16px;
+    }
+    .version-tag {
+      font-family: "Space Grotesk", sans-serif;
+      font-weight: 700;
+      font-size: 1.3rem;
+      color: var(--brand);
+      letter-spacing: 0.01em;
+    }
+    .version-tag.latest::after {
+      content: "Latest";
+      margin-left: 8px;
+      background: var(--brand);
+      color: #fff;
+      font-size: 0.65rem;
+      padding: 3px 8px;
+      border-radius: 999px;
+      vertical-align: middle;
+      letter-spacing: 0.06em;
+    }
+    .release-date { color: var(--muted); font-size: 0.95rem; font-weight: 600; }
+    .copy-link {
+      margin-left: auto;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #eef6f1;
+      color: var(--brand);
+      border: 1px solid #c9e3d3;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font: 600 0.82rem "Manrope", sans-serif;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .copy-link:hover { background: var(--brand); color: #fff; border-color: var(--brand); }
+    .copy-link.copied { background: #d3f0e1; color: var(--brand); border-color: var(--brand); }
+    .copy-link svg { width: 14px; height: 14px; }
+
+    .release h3 {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 1.05rem;
+      margin: 18px 0 8px;
+      color: var(--ink);
+    }
+    .release h3:first-of-type { margin-top: 0; }
+    .release ul { margin: 6px 0 0; padding-left: 22px; color: var(--ink); line-height: 1.65; }
+    .release li { margin-bottom: 6px; }
+    .release li strong { color: var(--brand); }
+
+    .release.is-hidden { display: none; }
+
+    /* ── Footer ─────────────────────────────────────── */
+    footer {
+      margin: 40px 0 32px;
+      padding-top: 24px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.88rem;
+      text-align: center;
+    }
+    footer a { color: var(--brand); text-decoration: none; font-weight: 600; }
+
+    @media (max-width: 640px) {
+      .release { padding: 20px; }
+      .release-head { flex-direction: column; align-items: flex-start; gap: 8px; }
+      .copy-link { margin-left: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <nav class="nav">
+        <span class="logo">OPEN24</span>
+        <div class="links">
+          <a href="index.html">Overview</a>
+          <a href="course-enrollment-full-flow.html">Enrollment</a>
+          <a href="reserve-resource.html">Court Booking</a>
+          <a href="email-notifications.html">Emails</a>
+          <a href="testing.html">Testing</a>
+          <a href="changelog.html" aria-current="page" style="background:#eef6f1;border-color:#c9e3d3;">Changelog</a>
+        </div>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <h1>Release notes</h1>
+      <p class="subtitle">
+        Every published version of the Open24 platform — combined frontend and backend. Each card is a self-contained summary of what changed and when. Copy a version link to share or to filter the page to just that release.
+      </p>
+    </section>
+
+    <!-- Filter banner: shown only when URL hash targets a single version -->
+    <div id="filter-banner" class="filter-banner" role="status" aria-live="polite">
+      <span>Showing</span>
+      <span class="label-pill" id="filter-banner-version">v—</span>
+      <span>only</span>
+      <button type="button" id="filter-banner-clear">Show all versions</button>
+    </div>
+
+    <main id="releases">
+
+      <!-- ───────────────── v1.2.0 ───────────────── -->
+      <article class="release" data-version="v1.2.0" id="v1.2.0">
+        <div class="release-head">
+          <span class="version-tag">v1.2.0</span>
+          <span class="release-date">June 16, 2026</span>
+          <button class="copy-link" type="button" data-version="v1.2.0" aria-label="Copy link to v1.2.0">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+            <span class="copy-text">Copy link</span>
+          </button>
+        </div>
+        <h3>Admin course management</h3>
+        <ul>
+          <li><strong>Delete a course safely.</strong> Courses can now be deleted as soon as they have no active enrollments — old sessions, payments, waitinglist entries and reserved court slots are cleaned up automatically as a single transaction.</li>
+          <li><strong>Clearer "can't delete" feedback.</strong> When a course can't be removed, the Delete button stays visible but disabled with an amber info icon. Hovering reveals a panel explaining exactly why (e.g. "This course has 3 active enrollments").</li>
+          <li><strong>All Sessions view toggle.</strong> The session list now offers a Cards view (default) and a Table view for quick scanning. Your preference is remembered per browser.</li>
+        </ul>
+        <h3>Course checkout</h3>
+        <ul>
+          <li><strong>Header navigation fixed on the checkout page.</strong> Clicking the <em>Course</em> link in the top navigation while on <code>/enrollments/checkout</code> previously sent customers to a broken <code>/enrollments/enroll</code> URL. It now reliably returns to the main <em>/enroll</em> browse page from anywhere in the app, so customers can step back out of checkout to keep shopping for courses without losing the navigation.</li>
+        </ul>
+      </article>
+
+      <!-- ───────────────── v1.1.7 ───────────────── -->
+      <article class="release" data-version="v1.1.7" id="v1.1.7">
+        <div class="release-head">
+          <span class="version-tag">v1.1.7</span>
+          <span class="release-date">June 14, 2026</span>
+          <button class="copy-link" type="button" data-version="v1.1.7" aria-label="Copy link to v1.1.7"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span class="copy-text">Copy link</span></button>
+        </div>
+        <h3>Admin "Create User" overhaul</h3>
+        <ul>
+          <li>Admins no longer set passwords or activation flags. The form now collects just the basics (name, email, phone, optional Stripe ID); the new user is emailed an invitation link to sign agreements and set their own password.</li>
+          <li>The success toast now tells the admin whether the invitation email was actually delivered, so they know if a manual resend is needed.</li>
+        </ul>
+        <h3>Invitation email redesigned</h3>
+        <ul>
+          <li>Polished new layout — centered hero, personalised greeting (with a graceful "Hi there," fallback), clear "What to expect" steps, prominent CTA and a 7-day-validity reassurance.</li>
+        </ul>
+        <h3>Bug fixes</h3>
+        <ul>
+          <li>Admin-created users no longer end up with blank first/last names.</li>
+          <li>Stray template tokens (e.g. <code>{{/if}}</code>) no longer leak into email bodies.</li>
+        </ul>
+      </article>
+
+      <!-- ───────────────── v1.1.6 ───────────────── -->
+      <article class="release" data-version="v1.1.6" id="v1.1.6">
+        <div class="release-head">
+          <span class="version-tag">v1.1.6</span>
+          <span class="release-date">June 13, 2026</span>
+          <button class="copy-link" type="button" data-version="v1.1.6" aria-label="Copy link to v1.1.6"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span class="copy-text">Copy link</span></button>
+        </div>
+        <h3>Semi-private on-demand lessons</h3>
+        <ul>
+          <li>The 2nd student on a semi-private private-lesson booking is now shown inline on the coach calendar — both on the event block and in the floating tooltip — without widening the cell.</li>
+          <li>Editing an existing booking correctly re-loads the 2nd student, and removing them now sticks (no more "ghost" reappearance on the next edit).</li>
+        </ul>
+        <h3>On-demand requests</h3>
+        <ul>
+          <li>"Booked by Coach" badges now also recognise legacy admin-direct enrollments, not just newer head-coach bookings.</li>
+        </ul>
+      </article>
+
+      <!-- ───────────────── v1.1.3 ───────────────── -->
+      <article class="release" data-version="v1.1.3" id="v1.1.3">
+        <div class="release-head">
+          <span class="version-tag">v1.1.3</span>
+          <span class="release-date">June 12, 2026</span>
+          <button class="copy-link" type="button" data-version="v1.1.3" aria-label="Copy link to v1.1.3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span class="copy-text">Copy link</span></button>
+        </div>
+        <h3>Head-coach booking flow</h3>
+        <ul>
+          <li>For semi-private private lessons, head coaches can now enrol a second student in the same booking via a tidy "+ Add 2nd student" affordance that only appears when relevant.</li>
+        </ul>
+        <h3>Admin on-demand requests page</h3>
+        <ul>
+          <li>Each row now shows whether the request originated from a customer (sky "Self-serve" pill) or a coach (violet "Booked by Coach" pill).</li>
+          <li>The Coach column now falls back to the scheduled session's coach when the course doesn't have one assigned yet.</li>
+        </ul>
+      </article>
+
+      <!-- ───────────────── v1.1.1 ───────────────── -->
+      <article class="release" data-version="v1.1.1" id="v1.1.1">
+        <div class="release-head">
+          <span class="version-tag">v1.1.1</span>
+          <span class="release-date">June 11, 2026</span>
+          <button class="copy-link" type="button" data-version="v1.1.1" aria-label="Copy link to v1.1.1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span class="copy-text">Copy link</span></button>
+        </div>
+        <h3>Coach calendar polish</h3>
+        <ul>
+          <li>Course event tooltips are now colour-coded by cohort and on-demand semi-private lessons get their own distinct orange palette for at-a-glance differentiation.</li>
+          <li>Course-name links inside event blocks open in a new tab so the coach doesn't lose calendar context.</li>
+        </ul>
+        <h3>Pending on-demand requests indicator</h3>
+        <ul>
+          <li>The sidebar "On-Demand Requests" menu item now shows a red badge with the count of pending requests, refreshed automatically after each action.</li>
+        </ul>
+        <h3>Enrollments &amp; transactions</h3>
+        <ul>
+          <li>The enrollment detail's progress chip now counts implied attendance into the single "Attended" total — coaches no longer see a confusing split.</li>
+          <li>Head-coach offline bookings on the Transactions page now correctly show "Offline" instead of an empty dash.</li>
+        </ul>
+      </article>
+
+      <!-- ───────────────── v1.1.0 ───────────────── -->
+      <article class="release" data-version="v1.1.0" id="v1.1.0">
+        <div class="release-head">
+          <span class="version-tag">v1.1.0</span>
+          <span class="release-date">June 10, 2026</span>
+          <button class="copy-link" type="button" data-version="v1.1.0" aria-label="Copy link to v1.1.0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span class="copy-text">Copy link</span></button>
+        </div>
+        <h3>Private-lesson confirmation emails</h3>
+        <ul>
+          <li>Customers and coaches now receive a polished "Your Private Lesson Is Scheduled" email when an on-demand request is booked — and a "Rescheduled" variant if the time changes later.</li>
+        </ul>
+        <h3>Head-coach booking modal</h3>
+        <ul>
+          <li>The selected-student card now offers quick Call, Text and Email buttons so coaches can reach out without leaving the booking flow.</li>
+        </ul>
+        <h3>Coach calendar</h3>
+        <ul>
+          <li>The "9 AM – 8 PM / Full Day" time-range toggle is now a prominent, animated control surfaced inline on the page header.</li>
+        </ul>
+        <h3>Admin polish</h3>
+        <ul>
+          <li>Session attendance details now show human-readable enrolment types (e.g. "Enrolled by Head Coach") instead of raw codes.</li>
+          <li>Cancellation timestamps in admin emails now render in a friendly timezone-aware format (e.g. <em>Wed, Jun 10, 2026, 9:34 PM EDT</em>).</li>
+        </ul>
+      </article>
+
+      <!-- ───────────────── v1.0.0 ───────────────── -->
+      <article class="release" data-version="v1.0.0" id="v1.0.0">
+        <div class="release-head">
+          <span class="version-tag">v1.0.0</span>
+          <span class="release-date">June 8, 2026</span>
+          <button class="copy-link" type="button" data-version="v1.0.0" aria-label="Copy link to v1.0.0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span class="copy-text">Copy link</span></button>
+        </div>
+        <h3>First stable release</h3>
+        <ul>
+          <li><strong>Head Coach role</strong> — Head Coaches now have full course-management parity with Admins (courses, cohorts, enrollments, sessions, attendances, waitlists, on-demand requests) plus a dedicated sidebar group and a new read-only <strong>Resource Calendar</strong> page polished to match the admin view.</li>
+          <li>New enrolments by a head coach are tagged as <em>Enrolled by Head Coach</em> end-to-end, distinct from admin enrolments.</li>
+          <li><strong>Stripe checkout hardening</strong> — invalid <code>session_id</code> values are rejected up-front, stopping bot/prefetch noise hitting Stripe with placeholder URLs.</li>
+          <li>The wallet now labels migrated gift-card credits as <em>From: System Migration</em> instead of <em>Unknown</em>.</li>
+        </ul>
+      </article>
+
+      <!-- ───────────────── Pre-1.0 summary ───────────────── -->
+      <article class="release" data-version="pre-1.0" id="pre-1.0">
+        <div class="release-head">
+          <span class="version-tag">v0.7 – v0.9</span>
+          <span class="release-date">March – May 2026</span>
+          <button class="copy-link" type="button" data-version="pre-1.0" aria-label="Copy link to pre-1.0 releases"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span class="copy-text">Copy link</span></button>
+        </div>
+        <h3>Pre-1.0 highlights</h3>
+        <ul>
+          <li>Initial public release of court booking, course enrollment (fixed, ongoing and on-demand), waiting list, refunds &amp; store credits, gift cards and passes, membership subscriptions, and the admin/coach dashboards.</li>
+          <li>Membership migration tooling — bulk import of legacy customers, gift cards and passes from the previous system with email-driven reactivation.</li>
+          <li>Lifecycle email framework with database-managed templates (registration, confirmation, cancellation, refund, waiver, etc.).</li>
+          <li>Stripe payment integration (cards, store credits, subscriptions) and a unified Transactions page.</li>
+          <li>Resource calendar with conflict detection, recurring courses, pricing rules and cohort-aware visuals.</li>
+        </ul>
+        <p class="subtitle" style="margin-top:14px;font-size:0.88rem;">
+          The full per-version pre-1.0 history is preserved in the platform repository changelogs.
+        </p>
+      </article>
+
+    </main>
+
+    <footer>
+      Open24 is published from <a href="https://github.com/opentwentyfour" rel="noopener" target="_blank">opentwentyfour</a>.
+    </footer>
+  </div>
+
+  <script>
+    (function () {
+      const banner = document.getElementById('filter-banner');
+      const bannerLabel = document.getElementById('filter-banner-version');
+      const bannerClear = document.getElementById('filter-banner-clear');
+      const releases = Array.from(document.querySelectorAll('article.release'));
+
+      // Mark the first release as "latest"
+      const firstTag = document.querySelector('article.release .version-tag');
+      if (firstTag) firstTag.classList.add('latest');
+
+      function applyFilter() {
+        const hash = (location.hash || '').replace(/^#/, '').trim();
+        const isFiltering = hash && releases.some(r => r.dataset.version === hash);
+
+        releases.forEach((r) => {
+          r.classList.toggle('is-hidden', isFiltering && r.dataset.version !== hash);
+        });
+
+        if (isFiltering) {
+          bannerLabel.textContent = hash;
+          banner.classList.add('is-active');
+          // Scroll the visible release into view
+          const target = releases.find(r => r.dataset.version === hash);
+          if (target) {
+            // Slight delay to let layout settle
+            requestAnimationFrame(() => target.scrollIntoView({ behavior: 'smooth', block: 'start' }));
+          }
+        } else {
+          banner.classList.remove('is-active');
+        }
+      }
+
+      function clearFilter() {
+        // Replace the URL without leaving a # in history so navigation feels clean
+        history.replaceState(null, '', location.pathname + location.search);
+        applyFilter();
+      }
+
+      bannerClear.addEventListener('click', clearFilter);
+      window.addEventListener('hashchange', applyFilter);
+
+      // ── Copy-link buttons ──
+      document.querySelectorAll('.copy-link').forEach((btn) => {
+        btn.addEventListener('click', async () => {
+          const v = btn.dataset.version;
+          const url = location.origin + location.pathname + '#' + v;
+          const label = btn.querySelector('.copy-text');
+          const originalLabel = label.textContent;
+
+          try {
+            await navigator.clipboard.writeText(url);
+          } catch (_err) {
+            // Fallback for older browsers
+            const ta = document.createElement('textarea');
+            ta.value = url;
+            ta.style.position = 'fixed';
+            ta.style.opacity = '0';
+            document.body.appendChild(ta);
+            ta.select();
+            try { document.execCommand('copy'); } catch (_e) { /* noop */ }
+            document.body.removeChild(ta);
+          }
+
+          // Also navigate to the anchor so the page filters to it immediately
+          if (location.hash !== '#' + v) {
+            location.hash = v;
+          } else {
+            // Same hash → trigger filter manually
+            applyFilter();
+          }
+
+          label.textContent = 'Link copied';
+          btn.classList.add('copied');
+          setTimeout(() => {
+            label.textContent = originalLabel;
+            btn.classList.remove('copied');
+          }, 1800);
+        });
+      });
+
+      // Initial state
+      applyFilter();
+    })();
+  </script>
+</body>
+</html>
