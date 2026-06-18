@@ -241,6 +241,29 @@
 
     <main id="releases">
 
+      <!-- ───────────────── v1.2.2 ───────────────── -->
+      <article class="release" data-version="v1.2.2" id="v1.2.2">
+        <div class="release-head">
+          <span class="version-tag">v1.2.2</span>
+          <span class="release-date">June 17, 2026</span>
+          <button class="copy-link" type="button" data-version="v1.2.2" aria-label="Copy link to v1.2.2">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+            <span class="copy-text">Copy link</span>
+          </button>
+        </div>
+        <h3>Admin passes</h3>
+        <ul>
+          <li><strong>Add a pass for any user.</strong> A new <em>Add Pass</em> button on the admin Passes page lets staff grant a pass directly to a customer's account — useful for complimentary passes, gestures of goodwill, or recovering a missed Stripe purchase — without a card transaction.</li>
+          <li><strong>Sensible defaults, simple overrides.</strong> Unit count and expiry default to the chosen pass template; admins can override either with a live "Expires on…" preview, and add an internal audit note (up to 1,000 characters).</li>
+          <li><strong>Choose whether the customer is notified.</strong> A "Send notification email" toggle (on by default) controls whether the recipient receives the standard <em>Your Pass Has Been Added to Your Account</em> email — uncheck it for silent back-fills so customers aren't double-notified after a recovery.</li>
+          <li><strong>Transparent audit trail.</strong> Passes created by an admin now show a <em>Granted by admin</em> source badge with timestamp, plus the internal note, on the pass detail page — so the next admin can see exactly when and why a pass was added.</li>
+        </ul>
+        <h3>Reliability</h3>
+        <ul>
+          <li><strong>Pass and gift-card purchases land in the database reliably.</strong> Fixed an edge case where a successful Stripe charge for a pass or a gift card could fail to create the corresponding record, requiring manual admin recovery. Both purchase paths are now hardened with clearer error logging so any future regression is diagnosable from server logs alone.</li>
+        </ul>
+      </article>
+
       <!-- ───────────────── v1.2.0 ───────────────── -->
       <article class="release" data-version="v1.2.0" id="v1.2.0">
         <div class="release-head">
