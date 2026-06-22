@@ -241,6 +241,40 @@
 
     <main id="releases">
 
+      <!-- ───────────────── v1.2.4 ───────────────── -->
+      <article class="release" data-version="v1.2.4" id="v1.2.4">
+        <div class="release-head">
+          <span class="version-tag">v1.2.4</span>
+          <span class="release-date">June 21, 2026</span>
+          <button class="copy-link" type="button" data-version="v1.2.4" aria-label="Copy link to v1.2.4">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+            <span class="copy-text">Copy link</span>
+          </button>
+        </div>
+        <h3>A clearer teaching calendar for coaches</h3>
+        <ul>
+          <li><strong>See lesson, coach, and students at a glance.</strong> Each event on the coach's teaching calendar now shows the lesson, the assigned coach, and the enrolled student(s) right on the card — no need to hover to find out who you're teaching.</li>
+          <li><strong>Lesson types are color-coded.</strong> Private on-demand, semi-private on-demand, activities and camps, and regular group courses each have their own color and icon — so you can scan a day and instantly tell what's coming up.</li>
+          <li><strong>Cleaner day view.</strong> The day grid now uses a soft sky-blue background so booked sessions stand out clearly against the open time slots.</li>
+          <li><strong>Hover for the full picture.</strong> Hovering over any event brings up a tidy tooltip with the lesson, time, coach, full student list, and lesson type.</li>
+        </ul>
+        <h3>Reliability</h3>
+        <ul>
+          <li><strong>Door access instructions now live inside the confirmation, update, and reminder emails.</strong> The old standalone <em>Door Access Instructions</em> email is no longer sent — customers were receiving two emails (a confirmation and a separate access email) for every booking and enrollment, which was easy to miss and easy to confuse. The same one-tap <em>Get Door Access Code</em> link is now embedded directly in the emails Open24 already sends, anchored to the relevant session and time window. Specifically, the Door Access section now appears in:
+            <ul>
+              <li><em>Your Booking Is Confirmed</em> — immediately after a court is booked.</li>
+              <li><em>Enrollment Confirmed</em> — immediately after enrolling in a course, activity, or camp.</li>
+              <li><em>Enrollment Updated</em> — sent when a group course, activity, or camp session is rescheduled, or when an admin moves an enrollment to a different course. <strong>The Door Access section is new to this email in v1.2.4.</strong></li>
+              <li><em>Your Private Lesson Is Scheduled</em> — sent when a Head Coach books or reschedules an on-demand private/semi-private lesson on behalf of a student. (On-demand reschedules send only this email — never a duplicate <em>Enrollment Updated</em>.)</li>
+              <li><em>Reminder: Upcoming Booking</em> — the pre-booking reminder.</li>
+              <li><em>Reminder: Upcoming Session</em> — the pre-course-session reminder.</li>
+            </ul>
+            One fewer email in the inbox, and the access link is always with the booking it belongs to.
+          </li>
+          <li><strong>Resource time slots save the right time, every time.</strong> Fixed a subtle bug where saving a resource time slot from outside the rink's timezone — or around a daylight-saving change — could shift the slot by an hour. Times now stay anchored to the rink's local time no matter where the admin is working from.</li>
+        </ul>
+      </article>
+
       <!-- ───────────────── v1.2.3 ───────────────── -->
       <article class="release" data-version="v1.2.3" id="v1.2.3">
         <div class="release-head">
