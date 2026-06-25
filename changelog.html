@@ -241,6 +241,43 @@
 
     <main id="releases">
 
+      <!-- ───────────────── v1.3.0 ───────────────── -->
+      <article class="release" data-version="v1.3.0" id="v1.3.0">
+        <div class="release-head">
+          <span class="version-tag">v1.3.0</span>
+          <span class="release-date">June 24, 2026</span>
+          <button class="copy-link" type="button" data-version="v1.3.0" aria-label="Copy link to v1.3.0">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+            <span class="copy-text">Copy link</span>
+          </button>
+        </div>
+        <h3>Phone numbers are now verified by text message</h3>
+        <ul>
+          <li><strong>One-time code by SMS.</strong> Adding or changing a phone number anywhere in Open24 — at sign-up, when finishing a profile, or later from the profile page — now triggers a 6-digit code sent to that number, which must be entered before the change is saved. This prevents typos and look-alike numbers from entering the system, and means coaches and staff can trust that the phone number on file is reachable.</li>
+          <li><strong>Verified badge.</strong> Phone numbers confirmed this way display a small green <em>Verified</em> badge. Legacy numbers (entered before this change) remain on file and show <em>Unverified</em> until the next confirmation — nothing breaks; the badge appears the next time the customer walks through any phone screen.</li>
+          <li><strong>Honest status indicator.</strong> If the text-message provider is having issues, the screen says so up front instead of letting the customer burn through retries.</li>
+        </ul>
+        <h3>Change email or phone, securely</h3>
+        <ul>
+          <li><strong>Change Email.</strong> The profile page now supports requesting an email change. A 6-digit code is sent to the <em>new</em> address — entering it proves control of the inbox and updates the account in one step. The sign-in email and display username stay perfectly in sync.</li>
+          <li><strong>Change Phone Number.</strong> Same flow for the phone — a code is texted to the new number, and the account updates only after the code is entered.</li>
+          <li><strong>Social sign-ins.</strong> Accounts signed in with Google or Facebook have their email managed by that provider, so it cannot be changed from inside Open24 (the profile page explains this in place of the change-email button). Changing the phone number still works as expected.</li>
+        </ul>
+        <h3>Find a student faster, at the front desk</h3>
+        <ul>
+          <li><strong>Search by phone digits.</strong> Coaches and admins can now find a customer by typing the last few digits of a phone number into the student search (in addition to name and email). Useful when a customer hands the front desk a sticky note at the rink.</li>
+        </ul>
+        <h3>Private lessons now use the same booking emails as group courses</h3>
+        <ul>
+          <li><strong>One consistent email.</strong> When a head coach books or reschedules an on-demand private (or semi-private) lesson, the customer now receives the same polished <em>Enrollment Confirmed</em> / <em>Enrollment Updated</em> email already used for group courses, complete with the session time and the one-tap <em>Get Door Access Code</em> link. No more two slightly different emails for the same kind of event.</li>
+        </ul>
+        <h3>Behind-the-scenes reliability work</h3>
+        <ul>
+          <li><strong>Faster diagnosis when something does go wrong.</strong> Detailed, privacy-safe tracing has been added to the checkout return flow, so the very rare cases where a payment goes through but the booking screen doesn't fully load can be pinpointed and resolved much faster. No new personal data is stored about customers — the traces only record which step of the checkout flow was reached.</li>
+          <li><strong>Server logs are now rotated automatically.</strong> Operational housekeeping so the platform keeps a clean, predictable disk footprint as traffic grows.</li>
+        </ul>
+      </article>
+
       <!-- ───────────────── v1.2.4 ───────────────── -->
       <article class="release" data-version="v1.2.4" id="v1.2.4">
         <div class="release-head">
