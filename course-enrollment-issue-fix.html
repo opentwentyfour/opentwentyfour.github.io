@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Open24 | Course Enrollment Issue — Diagnosis &amp; Fix</title>
+  <meta name="description" content="Detailed explanation of the course enrollment payment-to-record issue and the fixes applied in v1.3.1." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Manrope:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #f6f7f3;
+      --ink: #132019;
+      --muted: #4a5b52;
+      --card: #ffffff;
+      --line: #d8e0d9;
+      --brand: #0f8b5f;
+      --brand-2: #f2c94c;
+      --shadow: 0 14px 36px rgba(12, 26, 17, 0.12);
+      --danger: #dc2626;
+      --warn: #d97706;
+      --success: #16a34a;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Manrope", "Segoe UI", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 10% 10%, #d7f8e8 0, transparent 38%),
+        radial-gradient(circle at 90% 15%, #fff0bd 0, transparent 34%),
+        var(--bg);
+      min-height: 100vh;
+    }
+
+    .container { width: min(900px, 92vw); margin: 0 auto; }
+
+    header { padding: 22px 0; }
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      background: rgba(255, 255, 255, 0.82);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 10px 14px;
+      backdrop-filter: blur(8px);
+    }
+    .logo {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 1rem;
+      letter-spacing: 0.04em;
+      font-weight: 700;
+    }
+    .links { display: flex; gap: 10px; flex-wrap: wrap; }
+    .links a {
+      text-decoration: none;
+      color: var(--ink);
+      font-weight: 600;
+      font-size: 0.92rem;
+      border-radius: 999px;
+      padding: 8px 12px;
+      border: 1px solid transparent;
+    }
+    .links a:hover { border-color: var(--line); }
+
+    .card {
+      background: var(--card);
+      border-radius: 24px;
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      padding: 32px;
+      margin-bottom: 24px;
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      line-height: 1.15;
+    }
+
+    h2 {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 1.2rem;
+      margin: 28px 0 12px;
+      color: var(--ink);
+    }
+
+    h3 {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 1rem;
+      margin: 20px 0 8px;
+      color: var(--brand);
+    }
+
+    p, li { line-height: 1.7; color: var(--ink); }
+    .subtitle { color: var(--muted); margin: 0; }
+
+    .badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .badge-danger { background: #fef2f2; color: var(--danger); border: 1px solid #fecaca; }
+    .badge-fixed { background: #f0fdf4; color: var(--success); border: 1px solid #bbf7d0; }
+    .badge-warn { background: #fffbeb; color: var(--warn); border: 1px solid #fde68a; }
+
+    .timeline {
+      border-left: 3px solid var(--line);
+      padding-left: 20px;
+      margin: 16px 0;
+    }
+    .timeline-item {
+      position: relative;
+      margin-bottom: 16px;
+    }
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: -27px;
+      top: 7px;
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      background: var(--brand);
+      border: 2px solid var(--card);
+    }
+    .timeline-item.is-bad::before { background: var(--danger); }
+
+    .diagram {
+      background: #f8fafc;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 20px;
+      margin: 16px 0;
+      font-size: 0.9rem;
+      line-height: 1.8;
+      overflow-x: auto;
+    }
+    .diagram code {
+      font-family: "Space Mono", monospace;
+      font-size: 0.82rem;
+    }
+
+    .fix-box {
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      border-radius: 16px;
+      padding: 18px 20px;
+      margin: 14px 0;
+    }
+    .fix-box h4 {
+      margin: 0 0 6px;
+      color: var(--success);
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 0.95rem;
+    }
+
+    .warn-box {
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+      border-left: 4px solid var(--warn);
+      border-radius: 12px;
+      padding: 14px 18px;
+      margin: 14px 0;
+    }
+
+    ul { padding-left: 22px; }
+    li { margin-bottom: 6px; }
+
+    footer {
+      margin: 40px 0 32px;
+      padding-top: 24px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.88rem;
+      text-align: center;
+    }
+    footer a { color: var(--brand); text-decoration: none; font-weight: 600; }
+
+    @media (max-width: 640px) {
+      .card { padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <nav class="nav">
+        <span class="logo">OPEN24</span>
+        <div class="links">
+          <a href="index.html">Overview</a>
+          <a href="course-enrollment-full-flow.html">Enrollment</a>
+          <a href="reserve-resource.html">Court Booking</a>
+          <a href="email-notifications.html">Emails</a>
+          <a href="testing.html">Testing</a>
+          <a href="changelog.html">Changelog</a>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Hero -->
+    <section class="card">
+      <span class="badge badge-fixed">Fixed in v1.3.1</span>
+      <h1 style="margin-top:12px;">Course Enrollment: Payment Succeeded but No Record Created</h1>
+      <p class="subtitle">
+        A detailed explanation of the issue where customers were charged for course enrollments but no enrollment record appeared in the system — requiring manual admin intervention.
+      </p>
+      <p class="subtitle" style="margin-top:8px; font-size:0.88rem;">
+        First observed: June 18, 2026 &nbsp;·&nbsp; Fully diagnosed: June 27, 2026 &nbsp;·&nbsp; Fix deployed: June 28, 2026
+      </p>
+    </section>
+
+    <!-- What happened -->
+    <section class="card">
+      <h2>What happened?</h2>
+      <p>
+        Several customers completed a course enrollment checkout — their credit card was charged, and they saw a "success" screen — but <strong>no enrollment record was created</strong> in our database. The customer appeared to have no enrollment, received no confirmation email, and had no door access code. The admin had to manually enrol each affected customer.
+      </p>
+      <p>
+        This affected approximately 13 checkout sessions between June 18 and June 27, 2026. All payments were legitimate charges that landed in Stripe — the money left the customer's card — but from Open24's perspective the enrollment "never happened."
+      </p>
+    </section>
+
+    <!-- How enrollment normally works -->
+    <section class="card">
+      <h2>How course enrollment normally works</h2>
+      <p>When a customer checks out for a course, the <strong>primary path</strong> handles enrollment creation directly in the browser:</p>
+
+      <div class="diagram">
+        <strong>Primary path (browser-driven):</strong><br>
+        Customer clicks "Pay" → Stripe charges the card → Browser is redirected back to Open24 →
+        The page calls our server to say "payment confirmed, create the enrollment" → Record saved → Confirmation email sent.
+      </div>
+
+      <p>
+        This primary path is responsible for the vast majority of enrollments and works instantly. However, it depends on the customer's browser completing a round-trip — which can fail if the customer closes their tab, loses network, or their phone goes to sleep mid-redirect.
+      </p>
+      <p>
+        To guard against those edge cases, a <strong>safety net</strong> was added: a server-to-server webhook where Stripe independently notifies our backend that a payment succeeded. If the primary path missed the enrollment, the safety net catches it within seconds — no customer action required.
+      </p>
+
+      <div class="diagram">
+        <strong>Safety net (server-to-server webhook):</strong><br>
+        Stripe sends a notification directly to our server ("this payment succeeded") →
+        Backend checks if the enrollment was already created → If not, creates it now → Confirmation email sent.
+      </div>
+
+      <p>
+        In this incident, <strong>the primary path had a bug that caused it to silently fail</strong> for certain customers. The safety net — which was specifically designed to catch exactly this scenario — had not yet been connected to production due to a configuration oversight. The combination meant affected enrollments were permanently lost until an admin manually intervened.
+      </p>
+    </section>
+
+    <!-- Root Cause -->
+    <section class="card">
+      <h2><span class="badge badge-danger">Root Cause</span> &nbsp;Primary path silently skipped the enrollment</h2>
+
+      <h3>The problem</h3>
+      <p>
+        When a customer pays with a credit card that requires extra verification (3D-Secure — very common with Canadian and European banks), the browser is briefly redirected to the bank's verification page and then sent back to Open24. Upon return, the checkout page needs to load two things before it can finalize the enrollment:
+      </p>
+      <ul>
+        <li><strong>Course data</strong> — what course the customer enrolled in (loads fast, ~18 records)</li>
+        <li><strong>Session schedule data</strong> — which specific class sessions exist for that course (loads slower, ~500 records)</li>
+      </ul>
+      <p>
+        The code that handles the 3D-Secure return was waiting for the course data to load but <strong>was not waiting for the session schedule</strong>. On a fast connection this was never noticeable — both loaded within milliseconds. But on mobile networks or when the server was under load, the session data arrived a fraction of a second later.
+      </p>
+      <p>
+        The result: the system looked up "which sessions should this customer be enrolled in?" and found zero (because the schedule hadn't loaded yet). It then <strong>silently decided there was nothing to do</strong> — no error was shown, the success screen displayed, and the customer's pending checkout data was cleared from their browser. Permanently lost.
+      </p>
+
+      <div class="fix-box">
+        <h4>Fix applied</h4>
+        <ul>
+          <li>The return handler now waits for <strong>both</strong> course data AND session schedule data to be fully loaded before attempting to finalize — exactly like the normal checkout path already did.</li>
+          <li>If an item resolves to zero sessions (which should never happen for a paid course), the system now raises an explicit error instead of silently skipping it. This makes the problem immediately visible to the customer AND allows the webhook safety net to recover it.</li>
+          <li>The customer's pending checkout data is now only cleared <em>after</em> at least one enrollment record is confirmed saved — so a transient failure is recoverable on page reload.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Safety Net -->
+    <section class="card">
+      <h2><span class="badge badge-warn">Safety Net</span> &nbsp;Webhook safeguard was not yet connected to production</h2>
+
+      <h3>Context</h3>
+      <p>
+        The safety net was added specifically to protect against failures like the one above — any scenario where the browser doesn't finish its job (tab closed, phone lost signal, 3D-Secure redirect didn't complete cleanly). It was fully built, tested, and deployed in the codebase. The code worked correctly.
+      </p>
+      <p>
+        However, a configuration oversight meant the safety net was never actually receiving notifications from Stripe in the production environment:
+      </p>
+      <ul>
+        <li>The deployment script listed the Stripe payment key but <strong>omitted the webhook signing secret</strong>.</li>
+        <li>Every time the server was deployed, any manually-added webhook secret was overwritten with a blank value.</li>
+        <li>Without the signing secret, the webhook endpoint rejects all incoming requests for security reasons (it cannot verify they came from Stripe).</li>
+        <li>Additionally, the webhook URL had not yet been registered in the Stripe Dashboard for the live/production environment.</li>
+      </ul>
+      <p>
+        Had the safety net been connected, it would have caught every single one of the affected enrollments within seconds — automatically and without any customer or admin action. The primary path bug would have been invisible to customers.
+      </p>
+
+      <div class="fix-box">
+        <h4>Fix applied</h4>
+        <ul>
+          <li>The deployment script now includes the webhook signing secret alongside the payment key, so it survives every deploy going forward.</li>
+          <li>Operational documentation has been updated with step-by-step instructions for registering the webhook endpoint in the Stripe Dashboard and verifying it works.</li>
+        </ul>
+      </div>
+
+      <div class="warn-box">
+        <strong>Operational step required:</strong> The webhook endpoint must be registered in the Stripe Dashboard (live mode) and the signing secret must be saved to the production environment. This is a one-time setup task — once done, the safety net is permanently active.
+      </div>
+    </section>
+
+    <!-- Impact & recovery -->
+    <section class="card">
+      <h2>Impact and recovery</h2>
+      <p>
+        <strong>Affected customers:</strong> ~13 checkout sessions across approximately 5–6 customers between June 18–27, 2026. All were manually enrolled by an admin within minutes to hours of reporting.
+      </p>
+      <p>
+        <strong>Financial impact:</strong> Zero. All payments were legitimate and matched to the correct customer. No refunds were needed — the enrollments were fulfilled manually.
+      </p>
+      <p>
+        <strong>Recovery of stuck records:</strong> Once the webhook is live, Stripe can "resend" the original payment-success events for any still-pending rows, which will automatically trigger the enrollment creation through the normal webhook flow. Alternatively, an admin can manually drain them via the existing admin-enroll tool.
+      </p>
+    </section>
+
+    <!-- Why it wasn't caught sooner -->
+    <section class="card">
+      <h2>Why wasn't this caught sooner?</h2>
+      <ul>
+        <li><strong>The race condition was timing-dependent.</strong> On fast connections (like desktop on Wi-Fi — which all internal testing used), both data sources loaded within the same event loop tick. The bug only manifested on slower mobile connections or when the session count was high enough to create a perceptible load delay.</li>
+        <li><strong>The "success" screen showed even on failure.</strong> Because the skip was silent (no error thrown, no UI feedback), the customer had no reason to suspect anything went wrong until they checked their enrollment list or didn't receive a confirmation email.</li>
+        <li><strong>The safety net was assumed to be working.</strong> Since the webhook code was deployed and the route responded to requests, there was no obvious signal that it wasn't receiving real events from Stripe. The missing signing secret was invisible in normal operation — it only manifested as "zero events received," which could easily be confused with "no events to receive."</li>
+      </ul>
+    </section>
+
+    <!-- Prevention -->
+    <section class="card">
+      <h2>What prevents this from happening again?</h2>
+      <ul>
+        <li><strong>Primary path fixed.</strong> The root cause — the data-loading race condition — is resolved. The checkout return handler now waits for all required data before acting, eliminating the silent skip entirely.</li>
+        <li><strong>Safety net as a permanent backstop.</strong> Once the webhook is connected, every paid checkout has a guaranteed server-side path to enrollment creation — completely independent of what happens in the customer's browser. Tab closed? Phone died? 3D-Secure took too long? The webhook catches it within seconds.</li>
+        <li><strong>Fail-loud, not fail-silent.</strong> If the primary path encounters any unexpected state (like zero sessions for a paid course), it now shows an error to the customer and preserves the pending data for retry — rather than silently succeeding with nothing saved.</li>
+        <li><strong>Operational monitoring.</strong> The pending enrollments table serves as a clear health indicator: any row stuck in "pending" status for more than a few minutes means something is wrong. Admin can check this at a glance.</li>
+        <li><strong>Deploy-proof configuration.</strong> The webhook secret is now part of the automated deploy pipeline — it cannot be accidentally erased by a routine deployment.</li>
+      </ul>
+    </section>
+
+    <footer>
+      Open24 is published from <a href="https://github.com/opentwentyfour" rel="noopener" target="_blank">opentwentyfour</a>.
+      &nbsp;·&nbsp; <a href="changelog.html">Back to Changelog</a>
+    </footer>
+  </div>
+</body>
+</html>

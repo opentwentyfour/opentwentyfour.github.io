@@ -241,6 +241,29 @@
 
     <main id="releases">
 
+      <!-- ───────────────── v1.3.1 ───────────────── -->
+      <article class="release" data-version="v1.3.1" id="v1.3.1">
+        <div class="release-head">
+          <span class="version-tag">v1.3.1</span>
+          <span class="release-date">June 28, 2026</span>
+          <button class="copy-link" type="button" data-version="v1.3.1" aria-label="Copy link to v1.3.1">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+            <span class="copy-text">Copy link</span>
+          </button>
+        </div>
+        <h3>Course enrollment reliability — payments always land</h3>
+        <ul>
+          <li><strong>Fixed: payment succeeds but enrollment doesn't appear.</strong> A rare timing issue could cause the system to silently skip creating an enrollment record after a successful card charge — particularly on mobile or when using 3D-Secure bank verification. The customer saw a success screen but had no enrollment, no confirmation email, and no door access. This is now fixed: the checkout flow waits for all required data before finalizing, and any unexpected state surfaces an immediate error instead of failing silently. <a href="course-enrollment-issue-fix.html" style="color:var(--brand);font-weight:600;">Full details →</a></li>
+          <li><strong>Server-side safety net now active.</strong> A backup system that catches any missed enrollment (even if the customer's browser closes mid-checkout) was built but never connected to the payment processor due to a configuration oversight. It is now properly wired and will automatically recover any enrollment that the browser path misses — within seconds, with no manual intervention needed.</li>
+        </ul>
+        <h3>Admin tools — send targeted emails to course students</h3>
+        <ul>
+          <li><strong>Select recipients by course.</strong> When composing a custom email from the admin panel, staff can now filter the recipient list to students enrolled in a specific course — then select all with one click. Useful for class announcements, schedule changes, or event reminders.</li>
+          <li><strong>Personalize with names.</strong> Email subject and body now support <code>{{firstName}}</code>, <code>{{lastName}}</code>, and <code>{{email}}</code> placeholders — each recipient receives a personalized version. Example: "Hi {{firstName}}, your next session is…"</li>
+          <li><strong>Branded email option.</strong> A toggle wraps your message in the standard Open24 branded header and footer — matching the look of automated platform emails — so custom announcements feel professional without needing to write full HTML.</li>
+        </ul>
+      </article>
+
       <!-- ───────────────── v1.3.0 ───────────────── -->
       <article class="release" data-version="v1.3.0" id="v1.3.0">
         <div class="release-head">
