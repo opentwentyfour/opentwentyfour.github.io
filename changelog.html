@@ -258,6 +258,20 @@
           <li><strong>Non-members see the perk too.</strong> Guests browsing passes see a preview line — "Members pay $X.XX (save Y%)" — so the value of membership is visible on the shopping surface itself.</li>
           <li><strong>Optional per pass.</strong> Leaving Member Price blank keeps the old behaviour — everyone pays the same price. Admins opt-in per template.</li>
         </ul>
+        <h3>Passes — fixed end date + larger bundles</h3>
+        <ul>
+          <li><strong>Choose how your pass expires.</strong> When creating or editing a pass, admins can now pick between two expiry modes: a <em>rolling window</em> ("valid for X days after purchase") or a <em>fixed end date</em> ("all passes end on Dec 31, 2026 at 11:59 PM"). Fixed end dates are ideal for seasonal passes — every buyer's pass ends on the same day regardless of when they bought it.</li>
+          <li><strong>Bigger bundles.</strong> Removed the previous 10-pass ceiling on how many sessions a pass bundle can contain. Admins can now sell 20-packs, 25-packs, or any positive size. Quick-set chips for 10 and 20 keep the common cases fast to enter.</li>
+          <li><strong>Editing the template updates existing passes.</strong> If you change a template's end date or validity period, every active pass sold from that template is automatically re-synced to the new rule. Admin-issued comps with a hand-picked expiry are left untouched.</li>
+          <li><strong>Clearer expiry on all pass surfaces.</strong> The Buy Pass page, checkout, and My Passes page now show "Ends Dec 31, 2026 at 11:59 PM" for templates with a fixed end date, instead of the generic "180 days validity" text.</li>
+        </ul>
+        <h3>Admin — export bookings and course enrollments to CSV</h3>
+        <ul>
+          <li><strong>One-click Excel export.</strong> The Admin ▸ Bookings and Admin ▸ Course Enrollments pages now have an <em>Export CSV</em> button that downloads the current filtered view as a spreadsheet-ready file. Filter the list first (by date, status, customer, search) and only the visible rows are exported.</li>
+          <li><strong>Bookings export</strong> includes: booking ID, confirmation ID, created-at, state, type, customer name/email/phone, facility, resource names, slot count, first/last slot times, and price.</li>
+          <li><strong>Enrollments export</strong> includes: enrollment ID, enrolled-at, status, enrollment type, customer + child name, course name, cohort, level, schedule type, sessions enrolled/attended/remaining, total due/paid/refunded, promotion codes, and payment confirmation IDs.</li>
+          <li><strong>Excel-friendly out of the box.</strong> Files are UTF-8 with BOM and use local timestamps (e.g. <code>2026-07-04 14:30</code>), so double-clicking opens them cleanly in Excel or Numbers with accented characters and dates intact.</li>
+        </ul>
         <h3>Pass checkout — tax now shown on the confirmation</h3>
         <ul>
           <li><strong>"Amount Paid" now includes tax on every pass purchase.</strong> When paying with a saved card or store credit, the pass confirmation screen previously showed only the pre-tax price. It now shows the full tax-inclusive amount that was actually charged, matching your credit-card statement and Stripe receipt to the penny.</li>
