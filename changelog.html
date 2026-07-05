@@ -241,6 +241,41 @@
 
     <main id="releases">
 
+      <!-- ───────────────── v1.3.3 ───────────────── -->
+      <article class="release" data-version="v1.3.3" id="v1.3.3">
+        <div class="release-head">
+          <span class="version-tag">v1.3.3</span>
+          <span class="release-date">July 5, 2026</span>
+          <button class="copy-link" type="button" data-version="v1.3.3" aria-label="Copy link to v1.3.3">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+            <span class="copy-text">Copy link</span>
+          </button>
+        </div>
+        <h3>Admin custom email — live progress, cancel, and no more page hangs</h3>
+        <ul>
+          <li><strong>See it happen in real time.</strong> Sending a custom email to a large group used to leave the page frozen with a spinner until every message had gone out — sometimes tens of minutes with no feedback. The page now shows a live progress bar with a running count (<em>Sending 42 / 247</em>), which batch is in flight, an estimated time remaining, and the most-recently delivered address.</li>
+          <li><strong>Cancel mid-send.</strong> Change of plans? Hit <em>Cancel</em> and the send stops at the next batch boundary — batches already dispatched still deliver, and the result screen shows exactly how many went out before the stop.</li>
+          <li><strong>No accidental interruptions.</strong> Closing or refreshing the page while a send is in progress now prompts a confirmation — so a stray browser click doesn't cut the blast short.</li>
+          <li><strong>Honest results screen.</strong> When a send finishes, the summary clearly indicates whether every recipient received the message (green ✔), whether some failed (amber, with a per-recipient reason list of up to 20 failures + link to full email logs), or whether the operator cancelled (with the exact "X of Y" count).</li>
+          <li><strong>Works the same at any scale.</strong> A head coach sending to a 20-student roster gets the same responsive UX as a full-database announcement to a thousand customers.</li>
+          <li><strong>Personalization tokens now styled in the subject preview.</strong> Placeholder tokens like <code>{{firstName}}</code> in the email subject now show the same blue dashed-outline pill treatment as in the email body preview — so it's clear at a glance which parts of your subject line will be personalized per recipient.</li>
+        </ul>
+        <h3>Email deliverability — bulk sends no longer trigger Gmail throttling</h3>
+        <ul>
+          <li><strong>Fixed: a bulk send that stopped after ~90 messages.</strong> A recent 1000-recipient blast was interrupted mid-run when the outbound mail relay rejected further messages as "too many login attempts". The underlying cause — the mail service opening a fresh authenticated session for every single message instead of reusing one — has been reworked: one persistent connection is now kept open for the whole run, and outbound sends are paced automatically. Large sends now complete cleanly without tripping any relay-side limit.</li>
+          <li><strong>Automatic retry on transient hiccups.</strong> If the mail relay does return a temporary error mid-send (rate limit, connection reset, timeout), the message is retried with a growing backoff instead of being dropped — up to a few retries. Combined with the connection-reuse change, this means transient network blips no longer show up as failed rows in the email log.</li>
+        </ul>
+        <h3>Admin email logs — much faster page load</h3>
+        <ul>
+          <li><strong>Same list, a fraction of the data.</strong> The Admin ▸ Email Logs page was loading each row with the entire HTML body of the email attached to it — for pages containing long marketing emails, that meant a megabyte or two of payload per page just to display the summary table. The list now transfers only the columns actually shown (subject, recipient, status, sent-at). The full email content still loads on demand when you open a specific log entry.</li>
+          <li><strong>Long subjects no longer stretch the table.</strong> Personalized bulk-send subjects (which can be long once each recipient's name is filled in) are now truncated in the list view with the full text available on hover — the table keeps a consistent width.</li>
+        </ul>
+        <h3>Reliability — passes with more than 10 sessions no longer silently fail</h3>
+        <ul>
+          <li><strong>Fixed: a pass purchase that took payment but created no pass.</strong> A customer buying a 20-session pass had their card charged successfully but no pass appeared on their account and no confirmation email was sent. The pass storage layer still had an old cap of 10 sessions per pass, even though the pass-<em>template</em> layer was updated in v1.3.2 to allow any bundle size. The cap has been removed everywhere — pass bundles of 20, 25, or any positive size now save correctly on purchase. The affected customer's pass has been manually issued.</li>
+        </ul>
+      </article>
+
       <!-- ───────────────── v1.3.2 ───────────────── -->
       <article class="release" data-version="v1.3.2" id="v1.3.2">
         <div class="release-head">
