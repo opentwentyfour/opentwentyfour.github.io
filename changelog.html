@@ -259,6 +259,7 @@
         <h3>Enrollment page — refund amount and payment method now match reality</h3>
         <ul>
           <li><strong>Fixed: partial refund shown as far larger than it actually was.</strong> When a customer had a single session refunded, the "Refunded" line on their enrollment page could display the full session-pack price plus the wrong methods (<em>"$37.29 · card + store credit"</em> when the actual refund was one session paid to store credit only). The summary now reads the session-by-session refund total and derives the destination from the actual credit-transactions on file, so the amount and the "· card / store credit" label always match what the customer will see on their card statement or in their store credit balance.</li>
+          <li><strong>Same fix applied to the Admin enrollments list.</strong> The <em>Refunded X · method</em> pill on the Admin ▸ Course Enrollments list and the "Refund Total" column in its CSV export used the same broken formula. Both now agree with the enrollment detail page — a 1-of-3 session refund shows one session's worth, not all three.</li>
         </ul>
         <h3>Enrollment page — Cancelled vs. Upcoming badges now clearly different</h3>
         <ul>
@@ -276,7 +277,7 @@
         </ul>
         <h3>Enroll page — cancelled enrollments no longer make a course look "Full"</h3>
         <ul>
-          <li><strong>Fixed: available courses displayed as "Full" on the customer enroll page.</strong> A course with capacity 5 that had 4 active enrollments and 1 cancelled was being shown as <em>Full</em> to customers on <em>Enroll</em>, blocking quick-enroll and pushing them to the waiting list. The availability calculator was counting cancelled and withdrawn enrollments against the capacity. It now excludes them everywhere — the customer enroll page, the admin capacity warnings, and the coach/admin table views — so <em>Full</em> only appears when the course is genuinely at capacity, and the "N spots left" chip reflects real availability.</li>
+          <li><strong>Fixed: available courses, events, and camps displayed as "Full" on the customer enroll page.</strong> A course with capacity 5 that had 4 active enrollments and 1 cancelled was being shown as <em>Full</em> to customers on <em>Enroll</em>, blocking quick-enroll and pushing them to the waiting list. The availability calculator was counting cancelled and withdrawn enrollments against the capacity. It now excludes them everywhere the same signal is read — the customer enroll page, the Events &amp; Camps page (<em>Join</em>), the admin capacity warnings on the resource-calendar enroll dialog and the manage-enrollments page, and the coach/admin table views — so <em>Full</em> only appears when the course is genuinely at capacity, and the "N spots left" chip reflects real availability. The coach resource-calendar's semi-private "enrolled names" chip list also hides cancelled students.</li>
         </ul>
       </article>
 
