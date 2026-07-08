@@ -270,6 +270,14 @@
           <li><strong>Redesigned header, stats, and actions.</strong> Course title with a compact copy-ID pill, matching badge pills for cohort / level / schedule / lesson type / inactive, and lighter Delete + Edit Course buttons in the same style as the other page actions.</li>
           <li><strong>New Course Sessions section.</strong> The month calendar is now hidden by default (admins told us they rarely use it day-to-day) and can be opened via a "Show calendar" button — the choice is remembered per admin. The primary list toggles cleanly between compact <em>cards</em> and a dense <em>table</em>. On phones the default is cards; on desktop it defaults to the table — whatever you pick sticks.</li>
         </ul>
+        <h3>Admin courses list — enrolled count now matches the detail page</h3>
+        <ul>
+          <li><strong>Fixed: cancelled students inflated the "N enrolled" tile.</strong> On Admin ▸ Courses, each course card's "enrolled" number counted every enrollment on the course — including those marked <em>Cancelled</em> or <em>Withdrawn</em>. That disagreed with the course detail page's filtered count (which correctly excludes them) and could incorrectly flip the "Full" badge on a course that actually had open spots. The list card now uses the same filter as the detail page, so both numbers agree and the "Full" badge only shows when the course is genuinely at capacity.</li>
+        </ul>
+        <h3>Enroll page — cancelled enrollments no longer make a course look "Full"</h3>
+        <ul>
+          <li><strong>Fixed: available courses displayed as "Full" on the customer enroll page.</strong> A course with capacity 5 that had 4 active enrollments and 1 cancelled was being shown as <em>Full</em> to customers on <em>Enroll</em>, blocking quick-enroll and pushing them to the waiting list. The availability calculator was counting cancelled and withdrawn enrollments against the capacity. It now excludes them everywhere — the customer enroll page, the admin capacity warnings, and the coach/admin table views — so <em>Full</em> only appears when the course is genuinely at capacity, and the "N spots left" chip reflects real availability.</li>
+        </ul>
       </article>
 
       <!-- ───────────────── v1.3.3 ───────────────── -->
