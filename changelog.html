@@ -241,6 +241,37 @@
 
     <main id="releases">
 
+      <!-- ───────────────── v1.3.4 ───────────────── -->
+      <article class="release" data-version="v1.3.4" id="v1.3.4">
+        <div class="release-head">
+          <span class="version-tag">v1.3.4</span>
+          <span class="release-date">July 8, 2026</span>
+          <button class="copy-link" type="button" data-version="v1.3.4" aria-label="Copy link to v1.3.4">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+            <span class="copy-text">Copy link</span>
+          </button>
+        </div>
+        <h3>Refunds — one student's cancellation no longer cancels the session for everyone</h3>
+        <ul>
+          <li><strong>Fixed: refunding a session sometimes wiped that session off the schedule.</strong> When an admin refunded a student's spot in a session where that student happened to be the only one currently registered, the session itself was being marked as cancelled — freeing its court/coach slot and quietly emailing any future enrollees. Refunds now only remove <em>that student's</em> attendance; the session stays on the schedule and remains bookable by other students.</li>
+          <li><strong>Enrollment auto-cancel still works as intended.</strong> If every one of an enrollment's active sessions gets refunded, the enrollment itself is still automatically marked <em>Cancelled</em>. That per-enrollment behavior is unchanged — only the cross-enrollment session cascade was removed.</li>
+        </ul>
+        <h3>Enrollment page — refund amount and payment method now match reality</h3>
+        <ul>
+          <li><strong>Fixed: partial refund shown as far larger than it actually was.</strong> When a customer had a single session refunded, the "Refunded" line on their enrollment page could display the full session-pack price plus the wrong methods (<em>"$37.29 · card + store credit"</em> when the actual refund was one session paid to store credit only). The summary now reads the session-by-session refund total and derives the destination from the actual credit-transactions on file, so the amount and the "· card / store credit" label always match what the customer will see on their card statement or in their store credit balance.</li>
+        </ul>
+        <h3>Enrollment page — Cancelled vs. Upcoming badges now clearly different</h3>
+        <ul>
+          <li><strong>At-a-glance session status.</strong> On <em>My Enrollments</em>, the <strong>Cancelled</strong> session badge used to be a pale red pill that looked very similar to the pale blue <strong>Upcoming</strong> pill — several customers mentioned mistaking a cancelled session for a normal one. Cancelled is now a bold filled red pill with a "prohibited" icon; Upcoming is now a green outline pill. In-Progress and Concluded are unchanged.</li>
+        </ul>
+        <h3>Admin course detail page — cleaner, faster to scan, and mobile-friendly</h3>
+        <ul>
+          <li><strong>Enrolled Students count fixed.</strong> Cancelled enrollments were being counted alongside active ones, so the "Enrolled Students" number stayed the same after a refund. Cancelled and withdrawn students no longer inflate the count. A new "Show cancelled (N)" toggle reveals them on demand for auditing.</li>
+          <li><strong>Redesigned header, stats, and actions.</strong> Course title with a compact copy-ID pill, matching badge pills for cohort / level / schedule / lesson type / inactive, and lighter Delete + Edit Course buttons in the same style as the other page actions.</li>
+          <li><strong>New Course Sessions section.</strong> The month calendar is now hidden by default (admins told us they rarely use it day-to-day) and can be opened via a "Show calendar" button — the choice is remembered per admin. The primary list toggles cleanly between compact <em>cards</em> and a dense <em>table</em>. On phones the default is cards; on desktop it defaults to the table — whatever you pick sticks.</li>
+        </ul>
+      </article>
+
       <!-- ───────────────── v1.3.3 ───────────────── -->
       <article class="release" data-version="v1.3.3" id="v1.3.3">
         <div class="release-head">
