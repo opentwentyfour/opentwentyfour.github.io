@@ -241,6 +241,29 @@
 
     <main id="releases">
 
+      <!-- ───────────────── v1.4.0 ───────────────── -->
+      <article class="release" data-version="v1.4.0" id="v1.4.0">
+        <div class="release-head">
+          <span class="version-tag">v1.4.0</span>
+          <span class="release-date">July 15, 2026</span>
+          <button class="copy-link" type="button" data-version="v1.4.0" aria-label="Copy link to v1.4.0">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+            <span class="copy-text">Copy link</span>
+          </button>
+        </div>
+        <h3>Member pricing — visible everywhere members book, enroll, and pay</h3>
+        <ul>
+          <li><strong>See the member price up front while browsing.</strong> On <em>Enroll</em> and <em>Events &amp; Camps</em>, courses that offer a member price now show it in emerald with the regular per-session rate crossed out beside it and a <em>−X%</em> savings badge. Everyone sees this — including guests and non-members — so prospective members can see exactly how much a membership would save before they commit.</li>
+          <li><strong>Mobile browse layout tuned for the new price tile.</strong> On phones, when a course has a member price the stat card gets its own row so the strikethrough and discount badge don't get crammed against the other stats; the remaining two info tiles then split the row below evenly. Courses without a member price keep the pre-existing compact 3-column layout.</li>
+          <li><strong>Enrollment detail — Total Due now shows the actual price you paid.</strong> On <em>My Enrollments</em>, when you enrolled at the member price the Payment card now displays the emerald member total, the non-member equivalent struck through, and a <em>Member −X%</em> pill — matching the checkout amount to the penny.</li>
+          <li><strong>Legacy on-demand enrollments auto-heal.</strong> A handful of on-demand enrollments booked before the flag was introduced were showing the non-member total even though members were actually charged the member price. Those enrollments now recognize the member payment and display correctly without needing a data migration.</li>
+          <li><strong>Confirmation emails match the price you paid.</strong> The <em>Enrollment Confirmed</em> email's Amount Paid row now shows the emerald member amount alongside the strikethrough regular amount and the <em>Member −X%</em> savings pill — so the receipt on the confirmation email agrees with what the buyer sees in the app and on their card statement.</li>
+          <li><strong>Admin and coach on-demand scheduling now honor member pricing.</strong> Previously, when an admin or head coach scheduled a member's on-demand request into a session, the resulting enrollment silently reverted to the non-member rate, producing enrollments where the customer-visible Total Due disagreed with what they had already paid. Both the admin schedule flow and the head-coach schedule flow now persist the member price on the new enrollment — so the numbers match everywhere.</li>
+          <li><strong>Transactions list — a subtle crown marks member payments.</strong> Desktop keeps the inline <em>Member −X%</em> pill next to the amount. On mobile, a small emerald crown icon now sits in front of the price so the Member indicator no longer clashes with the Succeeded / Refunded status badge.</li>
+          <li><strong>Admin enrollment detail matches the customer view.</strong> The Total Amount Due tile on the admin enrollment detail page shows the same emerald member total + strikethrough non-member total + <em>Member −X%</em> pill, and the Total Amount Paid pill surfaces the discount percent alongside the "Member" label.</li>
+        </ul>
+      </article>
+
       <!-- ───────────────── v1.3.4 ───────────────── -->
       <article class="release" data-version="v1.3.4" id="v1.3.4">
         <div class="release-head">
