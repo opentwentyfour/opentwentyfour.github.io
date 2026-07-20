@@ -241,6 +241,41 @@
 
     <main id="releases">
 
+      <!-- ───────────────── v1.5.0 ───────────────── -->
+      <article class="release" data-version="v1.5.0" id="v1.5.0">
+        <div class="release-head">
+          <span class="version-tag">v1.5.0</span>
+          <span class="release-date">July 18, 2026</span>
+          <button class="copy-link" type="button" data-version="v1.5.0" aria-label="Copy link to v1.5.0">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+            <span class="copy-text">Copy link</span>
+          </button>
+        </div>
+        <h3>Marketing Campaigns — send targeted emails to members, straight from Admin</h3>
+        <ul>
+          <li><strong>New Admin ▸ Marketing ▸ Campaigns.</strong> Compose a marketing email (subject, preview text, rich HTML body), pick an audience, and send. Three audience modes: <em>All customers</em> (everyone who hasn't opted out), <em>Filtered</em> (by membership status, role, pass-holder, join-date range, name/email search), and <em>Manual</em> (paste a specific list of customer IDs).</li>
+          <li><strong>Preview the recipient count before you send.</strong> Filters update a live count so you know exactly how many people you're about to email. Send a test to yourself first, then schedule immediately or for a future date/time.</li>
+          <li><strong>Live per-recipient send tracking.</strong> The campaign detail page shows every recipient's status in real time — sent, failed, unsubscribed, pending — with a classified reason for any failure (e.g. mailbox full, invalid address, sender quota exceeded). One-click <em>Retry failed</em> for transient failures.</li>
+          <li><strong>Pause and resume mid-send.</strong> Made a typo mid-campaign? Pause the send, cancel the campaign, or (for large sends that hit our daily Gmail limit) the system auto-pauses and shows an "acknowledge and resume when quota resets" banner.</li>
+          <li><strong>One-click unsubscribe in every marketing email.</strong> Every marketing email now carries a CASL / CAN-SPAM compliant footer and Gmail's one-click unsubscribe button — customers can opt out of marketing with a single click without having to log in. Their opt-out is instant and applies to every future marketing send.</li>
+          <li><strong>Marketing opt-out is marketing-only.</strong> Unsubscribing from marketing has zero effect on transactional email — booking confirmations, refund receipts, pass expiries, and coach notifications keep flowing as they always did.</li>
+        </ul>
+        <h3>Coaches now get an email when they're assigned to (or removed from) a course</h3>
+        <ul>
+          <li><strong>Course-level assignment notifications.</strong> When Admin assigns a coach to a course or activity (or unassigns them), that coach now receives an email confirming the change, with the course name, schedule, and a link to their dashboard.</li>
+          <li><strong>Session-level assignment notifications.</strong> The same coach-facing email fires when a single session's coach is changed (e.g. covering for another coach on one date), so both the outgoing and incoming coach know about the swap without a manual heads-up from Admin.</li>
+        </ul>
+        <h3>Pass expiry now shows the correct end date on seasonal passes</h3>
+        <ul>
+          <li><strong>Fixed: seasonal passes bought during the season sometimes showed the wrong expiry.</strong> For pass templates with a fixed end date (e.g. a March–September summer pass), the expiry shown on the customer's pass, the admin pass detail page, and the purchase confirmation email now always match the template's actual end date. Previously, edge cases in the backend could store an expiry based on <em>days from purchase</em> instead, causing the emailed expiry to disagree with what the customer saw in their account.</li>
+          <li><strong>Admin views make expiry derivation explicit.</strong> Both the pass template detail page and each individual pass detail page now clearly label whether an expiry is a <em>Fixed end date</em> or <em>N days after purchase</em> — so admins can immediately explain to a customer why a given pass expires when it does.</li>
+        </ul>
+        <h3>Pass confirmation emails now show the exact amount paid, including member discounts</h3>
+        <ul>
+          <li><strong>Fixed: member-priced pass confirmations showed the non-member subtotal.</strong> When a member bought a pass at their member-only price, the confirmation email's "Amount Paid" line was rendering the template's full non-member subtotal instead of the discounted amount they were actually charged. The email now reads the exact amount from the Stripe charge for every purchase flow (checkout redirect and saved-card), so the receipt agrees with the card statement to the penny.</li>
+        </ul>
+      </article>
+
       <!-- ───────────────── v1.4.0 ───────────────── -->
       <article class="release" data-version="v1.4.0" id="v1.4.0">
         <div class="release-head">
