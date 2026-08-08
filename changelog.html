@@ -241,6 +241,29 @@
 
     <main id="releases">
 
+      <!-- ───────────────── v1.6.2 ───────────────── -->
+      <article class="release" data-version="v1.6.2" id="v1.6.2">
+        <div class="release-head">
+          <span class="version-tag">v1.6.2</span>
+          <span class="release-date">August 8, 2026</span>
+          <button class="copy-link" type="button" data-version="v1.6.2" aria-label="Copy link to v1.6.2">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+            <span class="copy-text">Copy link</span>
+          </button>
+        </div>
+        <h3>Cancelling a booking now frees the slot for re-booking</h3>
+        <ul>
+          <li><strong>Fixed: a cancelled time slot that couldn't be booked again.</strong> When an admin cancelled or refunded a booked slot, that time could get stuck in a state where no one — not the customer, not staff — could book it again. Cancelling now cleanly releases the slot so it shows up as an ordinary open time and can be re-booked right away.</li>
+          <li><strong>Refunds, slot deletions, and reschedules all behave the same.</strong> Whether you cancel by issuing a refund, by deleting a booked slot from the calendar, or by rescheduling to a new time, the released time is now consistently freed up, and the customer gets the cancellation email.</li>
+          <li><strong>Fixed: staff seeing a "not allowed" error when cancelling a customer's booking.</strong> Admins and coaches could hit a permission error when acting on someone else's booking. Staff can now cancel and reschedule on a customer's behalf without being wrongly blocked.</li>
+        </ul>
+        <h3>Mobile "Bird View" calendar — scrolling fixes</h3>
+        <ul>
+          <li><strong>Fixed: late-evening rows you couldn't reach.</strong> On some Android phones (notably Samsung), scrolling the Bird View schedule stopped around 10 PM and the remaining rows were hidden behind the browser's toolbar. The grid now sizes itself to the space that's actually visible, so every half-hour through the end of the day is reachable.</li>
+          <li><strong>Scroll past the calendar to see the legend.</strong> Once you reach the bottom of the schedule and keep swiping up, the whole page now continues scrolling so you can review the footer and colour legend beneath the grid.</li>
+        </ul>
+      </article>
+
       <!-- ───────────────── v1.6.1 ───────────────── -->
       <article class="release" data-version="v1.6.1" id="v1.6.1">
         <div class="release-head">
