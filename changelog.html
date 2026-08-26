@@ -241,6 +241,23 @@
 
     <main id="releases">
 
+      <!-- ───────────────── v1.6.3 ───────────────── -->
+      <article class="release" data-version="v1.6.3" id="v1.6.3">
+        <div class="release-head">
+          <span class="version-tag">v1.6.3</span>
+          <span class="release-date">August 25, 2026</span>
+          <button class="copy-link" type="button" data-version="v1.6.3" aria-label="Copy link to v1.6.3">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+            <span class="copy-text">Copy link</span>
+          </button>
+        </div>
+        <h3>Fixed: being charged again after cancelling a membership</h3>
+        <ul>
+          <li><strong>No more surprise charges after you cancel.</strong> In rare cases a membership could be signed up twice by accident (for example, a double-tap during checkout). The system only kept track of one of those subscriptions, so the extra one kept billing in the background even after the member cancelled. Signing up is now blocked with a clear message if you already have an active membership, so this can't happen again.</li>
+          <li><strong>Cancelling still works exactly as you'd expect.</strong> When you cancel, your membership stays active until the end of the paid period and then stops — with no further charges.</li>
+        </ul>
+      </article>
+
       <!-- ───────────────── v1.6.2 ───────────────── -->
       <article class="release" data-version="v1.6.2" id="v1.6.2">
         <div class="release-head">
